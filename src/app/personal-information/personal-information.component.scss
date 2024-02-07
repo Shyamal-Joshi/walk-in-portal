@@ -1,0 +1,31 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+
+.personal__information__container{
+    margin: $xxlarge-font+px;
+    background-color: $white-color;
+    padding: $xxlarge-font+px;
+    border-radius: 2px;
+
+    @include displayFlex(space-between,center);
+    .user__image__component{
+        @include displayFlex(space-between,center);
+        flex-direction: column;
+        .user__image{
+            width:112px ;
+            height: 134px;
+            object-fit: cover;
+            margin-bottom: $base-font+px;
+        }
+        .user__image__heading{
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: $secondary-color;
+        }
+        .user__image__info{
+            font-size: 10px;
+            color: $fifth-color;
+        }
+    }
+}

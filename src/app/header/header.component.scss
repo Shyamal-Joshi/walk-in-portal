@@ -1,0 +1,27 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+.header{
+    height: 56px;
+    background-color:$header-background-color;
+    background-image: url('../../assets/header_pattern_svg.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: overlay;
+    @include displayFlex(flex-start,center);
+
+    border-bottom: 2px solid $border-color;
+
+    >img{
+        height: 36px;
+        margin-left: $xxlarge-font+px;
+    }
+}
+
+@media (max-width:769px) {
+    .header{
+        >img{
+            margin-left: $base-font+px;
+        }
+    }
+}
