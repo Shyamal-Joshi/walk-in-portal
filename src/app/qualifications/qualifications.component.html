@@ -1,0 +1,151 @@
+<div class="educational__qualifications">
+    <div class="educational__qualification__header">
+        <h1>Educational Qualifications</h1>
+        <div class="arrow__container" (click)="toogleEducationalQualification()">
+            <div class="splitter"></div>
+            <mat-icon class="arrow__icon">
+                @if(isEducationalQualificationVisible){
+                    expand_less
+                }
+                @else{
+                    expand_more
+                }
+            </mat-icon>
+        </div>
+    </div>
+    @if(isEducationalQualificationVisible){
+        <div class="educational__qualification__body">
+            <form action="" class="educational__qualification__form">
+                <div class="aggregate_percentage">
+                    <label for="AggregatePercentage">Aggregate Percentage*</label>
+                    <input type="number" id="AggregatePercentage">
+                </div>
+                <div class="year_of_passing">
+                    <label for="YearOfPassing">Year of Passing*</label>
+                    <select name="YearOfPassing" id="YearOfPassing">
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                    </select>
+                </div>
+                <div class="qualification_and_stream">
+                    <div class="Qualification">
+                        <label for="qualification">Qualification*</label>
+                        <select name="qualification" id="qualification">
+                            <option value="Btech">Bachelor in Technology (B.Tech)</option>
+                            <option value="Btech">Bachelor in Technology (B.Tech)</option>
+                        </select>
+                    </div>
+                    <div class="Stream">
+                        <label for="stream">Stream*</label>
+                        <select name="stream" id="stream">
+                            <option value="it">Information Technology</option>
+                            <option value="it">Information Technology</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="college_and_other_name">
+                    <div class="college_name">
+                        <label for="CollegeName">College*</label>
+                        <select name="CollegeName" id="CollegeName">
+                            <option value="PIT">Pune Institute of Technology (PIT)</option>
+                            <option value="CSPIT">CSPIT</option>
+                        </select>
+                    </div>
+                    <div class="Other_college">
+                        <label for="OtherCollege">If others, please enter your college name</label>
+                        <input type="text" id="OtherCollege">
+                    </div>
+                </div>
+                <div class="college_location">
+                    <label for="CollegeLocation">Where is your college located?*</label>
+                    <input type="text" id="CollegeLocation">
+                </div>
+            </form>
+        </div>
+    }
+</div>
+
+<div class="professional__qualifications">
+    <div class="professional__qualifications__header">
+        <h1>Professional Qualifications</h1>
+        <div class="arrow__container" (click)="toogleProfessionalQualification()">
+            <div class="splitter"></div>
+            <mat-icon class="arrow__icon">
+                @if(isProfessionalQualificationVisible){
+                    expand_less
+                }
+                @else{
+                    expand_more
+                }
+            </mat-icon>
+        </div>
+    </div>
+    <form action="">
+        <div class="application__type">
+            <label for="stream">Applicant Type*</label>
+            <div class="application__radio">
+                <div>
+                    <input type="radio" name="application" id="fresher" [value]="false" [(ngModel)]="isExperienced" >Fresher
+                </div>
+                <div>
+                    <input type="radio" name="application" id="experienced" [value]="true" [(ngModel)]="isExperienced">Experienced
+                </div>
+                
+            </div>
+        </div>
+
+        @if(isProfessionalQualificationVisible){
+            @if(!isExperienced){
+                <div class="fresher__application">
+                    <div class="familiar__technologies">
+                        <label for="">Select All The Technologies You Are Familiar In</label>
+                        <div class="input_familiar__technologies">
+                            <div>
+                                <input type="checkbox" name="Javascript" id="Javascript" /> Javascript
+                            </div>
+                            <div>
+                                <input type="checkbox" name="Angular" id="Angular" /> Angular Js
+                            </div>
+                            <div>
+                                <input type="checkbox" name="React" id="React" /> React
+                            </div>
+                            <div>
+                                <input type="checkbox" name="Node" id="Node" /> Node Js
+                            </div>
+                            <div>
+                                <input type="checkbox" name="Others" id="Others" /> Others
+                            </div>
+                        </div>
+                        <label for="" >If others, please mention</label>
+                        <input type="text" id="other__familier__technologies">
+                    </div>
+                    <div class="previously__applied">
+                        <label for="stream">Have You Appeared For Any Test By Zeus in the past 12 months?*</label>
+                        <div class="previously__applied__radio">
+                            <div>
+                                <input type="radio" name="previously__applied" id="Yes" >Yes
+                            </div>
+                            <div>
+                                <input type="radio" name="previously__applied" id="No">No
+                            </div>
+                        </div>
+                        <label for="" >If Yes, which role did you apply for?</label>
+                        <input type="text" id="previously__applied__role">
+                    </div>
+                </div>
+                
+            }
+            @else {
+                <div class="experienced__application">
+                    experienced
+                </div>
+            }
+        }
+        
+        
+    </form>
+    
+</div>

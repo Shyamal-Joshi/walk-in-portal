@@ -1,0 +1,168 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+.educational__qualifications{
+    margin: 0px 24px;
+    .educational__qualification__body{
+        background-color: $white-color;
+        padding: 24px;
+        border-radius: 2px;
+        .educational__qualification__form{
+            @include displayFlex(normal,normal); 
+            flex-direction: column;
+            gap:40px;
+            label{
+                font-size: $xsmall-font+px;
+                color: $sixth-color;
+            }
+            input[type='text'],[type='number'],select{
+                padding: 0;
+                font-size: 16px;
+                border: none;
+                outline: none;
+                font-size: 16px;
+                color: #000;
+                margin-top: 12px;
+                font-family: quicksand;
+                font-weight: 600;
+                width: 180px;
+                border-bottom: 1px solid $border-38-color;
+                display: block;
+            }
+            .qualification_and_stream,.college_and_other_name{
+                @include displayFlex(normal,normal);
+                gap:24px;
+                select{
+                    width: 452px;
+                }
+                input{
+                    width: 452px;
+                }
+            }
+        }
+    }
+}
+
+.educational__qualification__header,.professional__qualifications__header{
+    height: 56px;
+    background-color: $section-header-color;
+    @include displayFlex(space-between,center); 
+    box-shadow: 0px 4px 6px #00000029;
+    >h1{
+        font-size: $base-font+px;
+        color: $primary-color;
+        margin-left: $base-font+px;
+    }
+    .arrow__container{
+        cursor: pointer;
+        .splitter{
+            border: 1px solid $border-12-color;
+            height: 56px;
+        }
+        @include displayFlex(space-between,center);
+        .arrow__icon{
+            color: $secondary-color;
+            margin:0px 8px;
+        }
+    }
+}
+
+.professional__qualifications{
+    margin: 24px 24px;
+    
+    .application__type{
+        background-color: $white-color;
+        border-radius: 2px;
+        padding: 24px;
+        label{
+            font-size: $xsmall-font+px;
+            color: $sixth-color;
+            
+        }
+        input[type='radio']{
+            height: 24px;
+            width: 20px;
+            accent-color: $secondary-color;
+            margin: 0;
+        }
+        .application__radio{
+            margin-top: 16px;
+            @include displayFlex(normal,center);
+            gap: 24px;
+            >div{
+                font-size: 16px;
+                @include displayFlex(normal,center);
+                gap: 8px;
+            }
+        }
+    }
+
+    .fresher__application{
+        background-color: $white-color;
+        margin-top: 8px;
+        padding: 24px;
+        border-radius: 2px;
+        label{
+            font-size: $xsmall-font+px;
+            color: $sixth-color;
+            
+        }
+        input[type='radio']{
+            height: 24px;
+            width: 20px;
+            accent-color: $secondary-color;
+            margin: 0;
+        }
+        input[type='text']{
+            padding: 0;
+            font-size: 16px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            color: #000;
+            margin-top: 12px;
+            font-family: quicksand;
+            font-weight: 600;
+            width: 180px;
+            border-bottom: 1px solid $border-38-color;
+            display: block;
+            width: 452px;
+        }
+        input[type='checkbox']{
+            height: 24px;
+            width: 18px;
+            accent-color: $secondary-color;
+            margin: 0;
+
+        }
+        .familiar__technologies{
+            .input_familiar__technologies{
+                @include displayFlex(normal,normal);
+                flex-direction: column;
+                margin-top: 16px;
+                gap: 16px;
+                >div{
+                    @include displayFlex(normal,center);
+                    gap: 9px;
+                }
+                margin-bottom: 16px;
+            }
+            margin-bottom: 40px;
+            
+        }
+        .previously__applied{
+            .previously__applied__radio{
+                margin-top: 16px;
+                @include displayFlex(normal,center);
+                gap: 24px;
+                >div{
+                    font-size: 16px;
+                    @include displayFlex(normal,center);
+                    gap: 8px;
+                }
+                margin-bottom: 17px;
+            }
+            
+        }
+    }
+}
