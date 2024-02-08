@@ -24,9 +24,5 @@ export class QualificationsComponent  {
     this.isProfessionalQualificationVisible = !this.isProfessionalQualificationVisible;
   }
 
-  toggleExperience(){
-    this.isExperienced=!this.isExperienced;
-  }
-
   
 }

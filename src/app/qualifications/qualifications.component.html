@@ -13,8 +13,8 @@
             </mat-icon>
         </div>
     </div>
-    @if(isEducationalQualificationVisible){
-        <div class="educational__qualification__body">
+    
+        <div class="educational__qualification__body" [ngClass]="{educationalVisibility:!isEducationalQualificationVisible}" >
             <form action="" class="educational__qualification__form">
                 <div class="aggregate_percentage">
                     <label for="AggregatePercentage">Aggregate Percentage*</label>
@@ -65,7 +65,7 @@
                 </div>
             </form>
         </div>
-    }
+    
 </div>
 
 <div class="professional__qualifications">
@@ -97,9 +97,9 @@
             </div>
         </div>
 
-        @if(isProfessionalQualificationVisible){
+        
             @if(!isExperienced){
-                <div class="fresher__application">
+                <div class="fresher__application" [ngClass]="{fresherVisibility:!isProfessionalQualificationVisible}" >
                     <div class="familiar__technologies">
                         <label for="">Select All The Technologies You Are Familiar In</label>
                         <div class="input_familiar__technologies">
@@ -139,11 +139,103 @@
                 
             }
             @else {
-                <div class="experienced__application">
-                    experienced
+                <div class="experienced__application" [ngClass]="{experiencedVisibility:!isProfessionalQualificationVisible}">
+                    <div class="years__of__exeperience">
+                        <label for="yearsOfExeperience">Years of Experience*</label>
+                        <input type="number" id="yearsOfExeperience">
+                    </div>
+                    <div class="current__ctc">
+                        <label for="currentCtc">Current CTC* (In Rupees)</label>
+                        <input type="number" id="currentCtc">
+                    </div>
+                    <div class="expected__ctc">
+                        <label for="expectedCtc">Expected CTC* (In Rupees)</label>
+                        <input type="number" id="expectedCtc">
+                    </div>
+                    <div class="exeperties__technologies">
+                        <label for="">Select All The Technologies You Expertise In*</label>
+                        <div class="input_exeperties__technologies">
+                            <div>
+                                <input type="checkbox" name="Javascript" id="Javascript" /> Javascript
+                            </div>
+                            <div>
+                                <input type="checkbox" name="Angular" id="Angular" /> Angular Js
+                            </div>
+                            <div>
+                                <input type="checkbox" name="React" id="React" /> React
+                            </div>
+                            <div>
+                                <input type="checkbox" name="Node" id="Node" /> Node Js
+                            </div>
+                            <div>
+                                <input type="checkbox" name="Others" id="Others" /> Others
+                            </div>
+                        </div>
+                        <label for="" >If others, please mention</label>
+                        <input type="text" id="other__familier__technologies">
+                    </div>
+                    <div class="familiar__technologies">
+                        <label for="">Select All The Technologies You Are Familiar In</label>
+                        <div class="input_familiar__technologies">
+                            <div>
+                                <input type="checkbox" name="Javascript" id="Javascript" /> Javascript
+                            </div>
+                            <div>
+                                <input type="checkbox" name="Angular" id="Angular" /> Angular Js
+                            </div>
+                            <div>
+                                <input type="checkbox" name="React" id="React" /> React
+                            </div>
+                            <div>
+                                <input type="checkbox" name="Node" id="Node" /> Node Js
+                            </div>
+                            <div>
+                                <input type="checkbox" name="Others" id="Others" /> Others
+                            </div>
+                        </div>
+                        <label for="" >If others, please mention</label>
+                        <input type="text" id="other__familier__technologies">
+                    </div>
+                    <div class="notice__period">
+                        <label for="stream">Are you currently on notice period?*</label>
+                        <div class="notice__period__radio">
+                            <div>
+                                <input type="radio" name="notice__period" id="Yes" >Yes
+                            </div>
+                            <div>
+                                <input type="radio" name="notice__period" id="No">No
+                            </div>
+                        </div>
+                        <div class="notice__period__info">
+                            <div class="notice__period__end__date">
+                                <label for="" >If Yes, when will your notice period end?*</label>
+                                <input type="date" id="notice__period__end__date">
+                            </div>
+                            <div class="notice__period__duration">
+                                <label for="" >How long is your notice period?* (Mention in months)</label>
+                                <select name="notice__period__duration" id="notice__period__duration">
+                                    <option value="2Months">2 months</option>
+                                    <option value="3Months">3 months</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="previously__applied">
+                        <label for="stream">Have You Appeared For Any Test By Zeus in the past 12 months?*</label>
+                        <div class="previously__applied__radio">
+                            <div>
+                                <input type="radio" name="previously__applied" id="Yes" >Yes
+                            </div>
+                            <div>
+                                <input type="radio" name="previously__applied" id="No">No
+                            </div>
+                        </div>
+                        <label for="" >If Yes, which role did you apply for?</label>
+                        <input type="text" id="previously__applied__role">
+                    </div>
                 </div>
             }
-        }
+        
         
         
     </form>
