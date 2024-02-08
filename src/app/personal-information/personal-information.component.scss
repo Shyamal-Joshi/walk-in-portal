@@ -8,7 +8,7 @@
     padding: $xxlarge-font+px;
     border-radius: 2px;
 
-    @include displayFlex(space-between,center);
+    @include displayFlex(space-between,flex-start);
     .user__image__component{
         @include displayFlex(space-between,center);
         flex-direction: column;
@@ -26,6 +26,107 @@
         .user__image__info{
             font-size: 10px;
             color: $fifth-color;
+        }
+    }
+
+    .information__component{
+        .personal__info__form{
+            @include displayFlex(normal,normal);
+            flex-direction: column;
+            gap: 40px;
+            label{
+                font-size: $xsmall-font+px;
+                color: $sixth-color;
+            }
+            input[type='text'],[type='email'],[type='url']{
+                padding: 0;
+                font-size: 16px;
+                border: none;
+                outline: none;
+                font-size: 16px;
+                color: #000;
+                margin-top: 12px;
+                font-family: quicksand;
+                font-weight: 600;
+                width: 480px;
+                border-bottom: 1px solid $border-38-color;
+                display: block;
+            }
+            input[type='checkbox']{
+                height: 24px;
+                width: 18px;
+                accent-color: $secondary-color;
+            }
+            .phone_no{
+                .number{
+                    input{
+                        padding: 0;
+                        font-size: 16px;
+                        border: none;
+                        outline: none;
+                        font-size: 16px;
+                        color: #000;
+                        margin-top: 12px;
+                        font-family: quicksand;
+                        font-weight: 600;
+                        border-bottom: 1px solid $border-38-color;
+                        text-align: center;
+                    }
+                    :first-child{
+                        width: 22px;
+                        margin: 0px 4px;
+                        
+                    }
+                    :last-child{
+                        width: 95px;
+                    }
+                }
+            }
+            .resume{
+                >label{
+                    @include displayFlex(flex-start,center);
+                    cursor: pointer;
+                    font-size: $small-font+px;
+                    text-transform: uppercase;
+                    color: $secondary-color;
+                    gap: 6px;
+                    >img{
+                        object-fit: cover;
+                    }
+                }
+                #input_resume{
+                    display: none;
+                }
+            }  
+            .job_roles{
+                .input_jobRoles{
+                    @include displayFlex(normal,normal);
+                    flex-direction: column;
+                    margin-top: 16px;
+                    gap: 16px;
+                    >div{
+                        @include displayFlex(normal,center);
+                        gap: 9px;
+                    }
+                    
+                    
+                }
+            } 
+            .referral_name{
+                >label{
+                    display: inline-block;
+                    letter-spacing: 0.3px;
+                    width: 480px;
+                }
+            }
+            .newsletter{
+                >div{
+                    @include displayFlex(normal,center);
+                    gap:8px
+                }
+                
+                    
+            }
         }
     }
 }
