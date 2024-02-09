@@ -1,0 +1,139 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+
+.listing__container{
+    margin: 35px 24px 0px 24px;
+    @include displayFlex(normal,normal);
+    flex-direction: column;
+    gap:24px;
+    .job__card{
+        h6{
+            margin: 0;
+            font-size: $xsmall-font+px;
+            color: $sixth-color;
+        }
+        h3{
+            margin: 0;
+            font-size: 18px;
+            color: $secondary-color;
+        }
+        hr{
+            margin: 0;
+            border: 1px solid $border-12-color;
+            flex: 1;
+            width: 100%
+        }
+        button{
+                background-color: $button-background-color;
+                border: none;
+                width: 168px;
+                height: 28px;
+                text-decoration: none;
+                color: $primary-color;
+                font-family: quicksand;
+                font-weight: 600;
+                box-shadow: 0px 3px 5px #0000003D;
+                border-radius: 2px;
+                font-size: $small-font+px;
+                cursor: pointer;
+        }
+        @include displayFlex(normal,normal);
+        flex-direction: column;
+        gap:16px;
+        background-color: $white-color;
+        padding: 16px;
+        box-shadow: 0px 4px 6px #0000003D;
+        position: relative;
+        .expiring__tag{
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: $xsmall-font+px;
+            color: $seven-color;
+            background-color: #FFE4E6;
+            border-radius: 2px;
+            padding: 2px 8px;
+            transform: translateY(-50%);
+            right: 24px;
+        }
+        .dateTime__and__location__container{
+            width: 261px;
+            .dateTime__and__location{
+                margin-top: 8px;
+                @include displayFlex(space-between,center);
+                .date{
+                    font-size: $small-font+px;
+                }
+                .splitter{
+                    border: 1px solid $border-12-color;
+                    height: 14px;
+                    // margin: 0 10px 0 8px;
+                }
+                .location{
+                    @include displayFlex(space-between,center);
+                    gap: 4px;
+                    >img{
+                        width: 16px;
+                    }
+                    font-size: $xsmall-font+px;
+                    color: $sixth-color;
+                }
+            }
+        }
+        .job__roles__container{
+            .job__roles{
+                margin-top: 8px;
+                @include displayFlex(normal,center);
+                gap: 8px;
+                .role{
+                    .icondiv{
+                        @include displayFlex(center,center);
+                        padding: 4px;
+                        border-radius: 50%;
+                        border: 1px solid $black-color;
+                        img{
+                            height: 16px;
+                            width: 16px;
+                        }
+                    }
+                    font-size: $small-font+px;
+                    gap: 8px;
+                    @include displayFlex(normal,center);
+                    .splitter{
+                        border: 1px solid $border-12-color;
+                        height: 14px;
+                    }
+                }
+            }
+        }
+        .extra__job__container{
+            letter-spacing: 0.25px;
+            font-size: $xxsmall-font+px;
+            @include displayFlex(normal,center);
+            span{
+                padding:3px 8px;
+                background-color: $yellow-background-color;
+                border-radius: 9px;
+            }
+        }
+        .view__more__btn__container{
+            @include displayFlex(center,center);
+            margin-top: 8px;
+        }
+    }
+}
+
+
+@media (max-width:376px) {
+    .listing__container{
+        .job__card{
+            .job__roles__container{
+                .job__roles{
+                    @include displayFlex(normal,normal);
+                    flex-direction: column;
+                }
+            }
+        }
+    }
+}

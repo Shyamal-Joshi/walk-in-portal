@@ -1,0 +1,53 @@
+<div class="listing__container">
+    @for(job of jobs;track job.id){
+        <div class="job__card">
+            @if(job.isExpiring){
+                <div class="expiring__tag"> {{job.isExpiringTitle}} </div>
+            }
+            <h3>
+                {{job.title}}
+            </h3>
+            <div class="dateTime__and__location__container">
+                <h6>Date & Time :</h6>
+                <div class="dateTime__and__location">
+                    <div class="date"> {{job.startDate}} to {{job.endDate}} </div>
+                    <div class="splitter"></div>
+                    <div class="location">
+                        <img src="../../assets/icons/location_on_grey_24dp.svg" alt="">
+                        {{job.location}}
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <div class="job__roles__container">
+                <h6>Job Roles :</h6>
+                <div class="job__roles">
+                    @for(role of job.job_roles;track $index){
+                        <div class="role">
+                            <div class="icondiv">
+                                <img src="../../assets/icons/Instructional Designer.svg" alt="">
+                            </div>
+                            
+                            <span> {{role}} </span>
+                            @if(job.job_roles.length>1 && $index<job.job_roles.length-1){
+                                <div class="splitter" [hidden]="screenWidth < 376"></div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+            @if(job.isExtraTag){
+                <div class="extra__job__container">
+                    <span class="extra__job__tag">
+                        {{job.isExtraTagTitle}}
+                    </span>
+                </div>
+            }
+            <div class="view__more__btn__container">
+                <button class="view__more__btn">
+                    VIEW MORE DETAILS
+                </button>
+            </div>
+        </div>
+    }
+</div>

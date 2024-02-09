@@ -83,7 +83,7 @@
             </mat-icon>
         </div>
     </div>
-    <form action="">
+    <form action="" [hidden]="!isProfessionalQualificationVisible">
         <div class="application__type">
             <label for="stream">Applicant Type*</label>
             <div class="application__radio">
@@ -98,8 +98,8 @@
         </div>
 
         
-            @if(!isExperienced){
-                <div class="fresher__application" [ngClass]="{fresherVisibility:!isProfessionalQualificationVisible}" >
+        @if(!isExperienced){
+            <div class="fresher__application">
                     <div class="familiar__technologies">
                         <label for="">Select All The Technologies You Are Familiar In</label>
                         <div class="input_familiar__technologies">
@@ -135,11 +135,10 @@
                         <label for="" >If Yes, which role did you apply for?</label>
                         <input type="text" id="previously__applied__role">
                     </div>
-                </div>
-                
-            }
-            @else {
-                <div class="experienced__application" [ngClass]="{experiencedVisibility:!isProfessionalQualificationVisible}">
+            </div>
+        }
+        @else {
+            <div class="experienced__application">
                     <div class="years__of__exeperience">
                         <label for="yearsOfExeperience">Years of Experience*</label>
                         <input type="number" id="yearsOfExeperience">
@@ -233,11 +232,8 @@
                         <label for="" >If Yes, which role did you apply for?</label>
                         <input type="text" id="previously__applied__role">
                     </div>
-                </div>
-            }
-        
-        
-        
+            </div>
+        }
     </form>
     
 </div>
