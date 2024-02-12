@@ -132,6 +132,11 @@
                 .job__roles{
                     @include displayFlex(normal,normal);
                     flex-direction: column;
+                    .role{
+                        .splitter{
+                            display: none;
+                        }
+                    }
                 }
             }
         }

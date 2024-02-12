@@ -1,0 +1,167 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+span {
+    padding: 0;
+    font-size: 16px;
+    color: #000;
+    margin-top: 12px;
+    font-family: quicksand;
+    font-weight: 600;
+    display:block;
+}
+
+h1{
+    font-size: $base-font+px;
+    color: #000;
+    margin : 0;
+}
+
+label {
+    font-size: $xsmall-font+px;
+    color: $sixth-color;
+}
+
+
+.preview__profile__header,.qualification__profile__header{
+
+    @include displayFlex(space-between, center);
+    padding: 0px 24px;
+    margin: 0px;
+    font-size: $base-font+px;
+
+    .edit__profile {
+        @include displayFlex(center, center);
+        gap: 9px;
+        margin: 0px;
+        color: $secondary-color;
+    }
+}
+
+.personal__information__container {
+    margin:24px;
+    background-color: $white-color;
+    padding: $xxlarge-font+px;
+    border-radius: 2px;
+
+    @include displayFlex(space-between, flex-start);
+
+    input[type='checkbox']{
+        height: 24px;
+        width: 18px;
+        accent-color: $secondary-color;
+    }
+
+    .user__image__component {
+    
+        .user__image {
+            width: 112px;
+            height: 134px;
+            object-fit: cover;
+            margin-bottom: $base-font+px;
+        }
+
+    }
+
+    .information__component {
+        .personal__info__form {
+            @include displayFlex(normal, normal);
+            flex-direction: column;
+            gap: 40px;
+
+            
+
+
+            .resume {
+                >label {
+                    @include displayFlex(flex-start, center);
+                    cursor: pointer;
+                    font-size: $small-font+px;
+                    text-transform: uppercase;
+                    color: $secondary-color;
+                    gap: 6px;
+
+                    >img {
+                        object-fit: cover;
+                    }
+                }
+            }
+
+            
+
+            
+
+            .newsletter {
+                >div {
+                    @include displayFlex(normal, center);
+                    gap: 8px
+                }
+            }
+        }
+    }
+}
+
+
+.qualification__information__container{
+
+
+    .education__information__header,.professional__information__header{
+        margin: 24px 24px 0px 24px;
+        padding: 18px 16px;
+        background-color: $section-header-color;
+    }
+
+    .professional__information_subheader{
+        margin: 0px 24px 9px 24px;
+        background-color: $white-color;
+        padding: $xxlarge-font+px;
+    }
+
+    .educational__qualification__body{
+        margin: 0 24px 0px 24px;
+        background-color: $white-color;
+        padding: 24px;
+        border-radius: 2px;
+        .educational__qualification__form{
+            @include displayFlex(normal,normal); 
+            flex-direction: column;
+            gap:40px;
+            
+            .qualification_and_stream,.college_and_other_name{
+                @include displayFlex(normal,normal);
+                gap:24px;
+                
+                .Qualification,.college_name,.Stream,.Other_college{
+                    width: 452px;
+                }
+                
+                
+            }
+        }
+    }
+
+    .professional__information__container{
+        margin: 0px 24px 24px 24px;
+        background-color: $white-color;
+        padding: $xxlarge-font+px;
+        @include displayFlex(normal,normal); 
+        flex-direction: column;
+        gap:40px;
+
+
+        .input_exeperties__technologies,.input_familiar__technologies,.previously__applied__radio{
+            margin-bottom: 16px;
+        }
+
+        .notice__period__info{
+            margin-top: 16px;
+            @include displayFlex(normal,normal);
+            gap:24px;
+
+            .notice__period__duration,.notice__period__end__date{
+                width: 452px;
+            }
+        }
+    }
+}
+

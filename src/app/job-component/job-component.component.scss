@@ -1,18 +1,32 @@
 @import "../../scss/variables";
 @import "../../scss/mixins";
 
+h6,label{
+    margin: 0;
+    font-size: $xsmall-font+px;
+    color: $sixth-color;
+}
+hr{
+    margin: 0;
+    border: 1px solid $border-12-color;
+    flex: 1;
+    width: 100%
+}
+input[type='radio']{
+    height: 24px;
+    width: 20px;
+    accent-color: $secondary-color;
+    margin: 0;
+}
+input[type='checkbox']{
+    height: 24px;
+    width: 18px;
+    accent-color: $secondary-color;
+    margin: 0;
+}
+
 .job__details__and__prereuisites{
-    h6{
-        margin: 0;
-        font-size: $xsmall-font+px;
-        color: $sixth-color;
-    }
-    hr{
-        margin: 0;
-        border: 1px solid $border-12-color;
-        flex: 1;
-        width: 100%
-    }
+    
     box-shadow: 0px 4px 6px #0000003D;
     margin: 26px 24px;
     .pre__requisites{
@@ -28,6 +42,7 @@
         }
         
         .arrow__container{
+            cursor: pointer;
             @include displayFlex(space-between,center);
             .splitter{
                 border: 1px solid $border-12-color;
@@ -143,6 +158,112 @@
     }
 }
 
+.time__slots__and__preference{
+    box-shadow: 0px 4px 6px #0000003D;
+    background-color: $white-color;
+    margin: 24px;
+    padding: 16px;
+    h1{
+        margin: 0;
+        margin-bottom: 24px;
+        font-size: 16px;
+    }
+    .time__slot{
+        .time__radios{
+            margin-top: 16px;
+            @include displayFlex(center,normal);
+            flex-direction: column;
+            gap: 16px;
+            >div{
+                font-size: 16px;
+                @include displayFlex(normal,center);
+                gap: 8px;
+            }
+        }
+    }
+    hr{
+        margin: 16px 0;;
+    }
+    .preferences{
+        .input__preferences{
+            @include displayFlex(normal,normal);
+            flex-direction: column;
+            margin-top: 16px;
+            gap: 16px;
+            >div{
+                @include displayFlex(normal,center);
+                gap: 9px;
+            }
+        }
+    }
+    .resume{
+        >label{
+            @include displayFlex(flex-start,center);
+            cursor: pointer;
+            font-size: $small-font+px;
+            text-transform: uppercase;
+            color: $secondary-color;
+            gap: 6px;
+            >img{
+                object-fit: cover;
+            }
+        }
+        #input_resume{
+            display: none;
+        }
+    }  
+}
+.roles{
+    margin: 24px;
+    .role__component{
+        margin: 16px 0;
+        box-shadow: 0px 4px 6px #00000029;
+        .role__component__header{
+            background-color: #dbefff;
+        height: 56px;
+        padding: 10px 8px 10px 16px;
+        
+        box-sizing: border-box;
+        @include displayFlex(space-between,normal);
+        h1{
+            margin: 0;
+            font-size: 16px;
+            @include displayFlex(normal,center);
+        }
+        
+        .arrow__container{
+            cursor: pointer;
+            @include displayFlex(space-between,center);
+            .splitter{
+                border: 1px solid $border-12-color;
+                height: 56px;
+
+            }
+            .arrow__icon{
+                color: $secondary-color;
+                margin-left: 8px;
+                // width: 12px;
+                height: 24px;
+                // font-size: 12px;
+                
+            }
+        }
+        }
+        
+    }
+    .role__details__card{
+        background-color: $white-color;
+        padding: 16px;
+        hr{
+            margin: 16px 0;
+        }
+        h6{
+            margin-bottom: 16px;
+        }
+        font-size: 14px;
+        line-height: 24px;
+    }
+}
 
 
 
@@ -160,7 +281,16 @@
                     }
                 }
             }
-    }
+            .job__basic__details__title{
+                >button{
+                    position: fixed;
+                    bottom: 0;
+                    width: 100%;
+                    left: 0;
+                    height: 36px;
+                }
+            }
+        }
     }
     
 }

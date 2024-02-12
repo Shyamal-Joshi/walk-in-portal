@@ -11,6 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class JobComponentComponent implements OnInit{
   public isPreRequisitesOpen=false;
+
+  isJobRolesOpen: boolean[] = [];
   private _jobid:any;
   public job:any;
   public jobs=[
@@ -31,7 +33,7 @@ export class JobComponentComponent implements OnInit{
 
         "jobRoleWithDetails":[
           {
-            "packages":500000,
+            "package":500000,
 
             "job_role":"Instructional Designer",
 
@@ -77,7 +79,7 @@ export class JobComponentComponent implements OnInit{
 
         "jobRoleWithDetails":[
           {
-            "packages":500000,
+            "package":500000,
 
             "job_role":"Instructional Designer",
 
@@ -86,7 +88,7 @@ export class JobComponentComponent implements OnInit{
             "requirements":"- Experience in creating instructional plans and course maps. - Experience in the use of media like graphics, illustrations, photographs, audio, video, animations, and simulations in instruction - Awareness of different instructional design models and familiarity with instructional and learning theories - Awareness of latest trends in e-learning and instructional design - Strong client consulting/interfacing skills. - Ability to guide clients to focus on specific objectives and teaching points - Strong meeting facilitation, presentation and interpersonal skills - A thorough understanding of the web as an instructional medium - Post graduate degree in Education, Instructional Design, Mass Communication or Journalism",
           },
           {
-            "packages":700000,
+            "package":700000,
 
             "job_role":"Software Engineer",
 
@@ -95,7 +97,7 @@ export class JobComponentComponent implements OnInit{
             "requirements":"- Experience in creating instructional plans and course maps. - Experience in the use of media like graphics, illustrations, photographs, audio, video, animations, and simulations in instruction - Awareness of different instructional design models and familiarity with instructional and learning theories - Awareness of latest trends in e-learning and instructional design - Strong client consulting/interfacing skills. - Ability to guide clients to focus on specific objectives and teaching points - Strong meeting facilitation, presentation and interpersonal skills - A thorough understanding of the web as an instructional medium - Post graduate degree in Education, Instructional Design, Mass Communication or Journalism",
           },
           {
-            "packages":550000,
+            "package":550000,
 
             "job_role":"Software Quality Engineer",
 
@@ -136,7 +138,7 @@ export class JobComponentComponent implements OnInit{
         ],
         "jobRoleWithDetails":[
           {
-            "packages":500000,
+            "package":500000,
 
             "job_role":"Instructional Designer",
 
@@ -145,7 +147,7 @@ export class JobComponentComponent implements OnInit{
             "requirements":"- Experience in creating instructional plans and course maps. - Experience in the use of media like graphics, illustrations, photographs, audio, video, animations, and simulations in instruction - Awareness of different instructional design models and familiarity with instructional and learning theories - Awareness of latest trends in e-learning and instructional design - Strong client consulting/interfacing skills. - Ability to guide clients to focus on specific objectives and teaching points - Strong meeting facilitation, presentation and interpersonal skills - A thorough understanding of the web as an instructional medium - Post graduate degree in Education, Instructional Design, Mass Communication or Journalism",
           },
           {
-            "packages":700000,
+            "package":700000,
 
             "job_role":"Software Engineer",
 
@@ -177,10 +179,18 @@ export class JobComponentComponent implements OnInit{
     this._jobid=id;
     this.job=this.jobs.filter((job)=>job.id===this._jobid);
     this.job=this.job[0];
+
+    for(let i=0;i<this.job?.jobRoleWithDetails?.length; i++){
+      this.isJobRolesOpen.push(false);
+    }
   }
 
   tooglePreRequisitesOpen(){
     this.isPreRequisitesOpen=!this.isPreRequisitesOpen;
+  }
+
+  toogleisJobRolesOpen(id:any){
+    this.isJobRolesOpen[id]=!this.isJobRolesOpen[id];
   }
 
 }

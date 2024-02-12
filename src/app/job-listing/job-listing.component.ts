@@ -1,4 +1,3 @@
-import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
@@ -11,14 +10,10 @@ import { RouterLink } from '@angular/router';
   styleUrl: './job-listing.component.scss'
 })
 export class JobListingComponent implements OnInit{
-  screenWidth:any;
-
-  constructor(@Inject(PLATFORM_ID) private platformId: any){}
+  
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.screenWidth = window.innerWidth;
-    }
+    
   }
 
   jobs = [

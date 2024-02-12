@@ -88,5 +88,87 @@
     </div>
 </div>
 
+<div class="time__slots__and__preference">
+    <h1>Time Slots & Preferences</h1>
+    <div class="time__slot">
+        <label>Select a Time Slot :</label>
+        <div class="time__radios">
+            @for (time of job.timeSlots; track $index) {
+                <div>
+                    <input type="radio" name="application" id="fresher">{{time}}
+                </div>
+            }
+        </div>
+    </div>
+    <hr>
+    <div class="preferences">
+        <label for="">Select Your Preference :</label>
+        <div class="input__preferences">
+            @for (role of job.jobRoleWithDetails; track $index) {
+                <div>
+                    <input type="checkbox" [name]="'role'+$index+1" [id]="'role'+$index+1" [value]="role.job_role"/> {{role.job_role}}
+                </div>
+            }
+            
+        </div>
+    </div>
+    <hr>
+    <div class="resume">
+        <label for="input_resume">
+            <img src="../../assets/icons/Upload_black_24dp.svg" alt="">
+            Upload Resume
+        </label>
+        <input id="input_resume" type="file" accept=".pdf">
+    </div>
+</div>
+
+<div class="roles">
+    @for (role of job.jobRoleWithDetails; track $index) {
+        <div class="role__component">
+            <div class="role__component__header">
+                <h1>{{role.job_role}}</h1>
+                    <div class="arrow__container" (click)="toogleisJobRolesOpen($index)">
+                        <div class="splitter"></div>
+                        <mat-icon class="arrow__icon" >
+                            @if(isJobRolesOpen[$index]){
+                                expand_less
+                            }
+                            @else{
+                                expand_more
+                            }
+                        </mat-icon>
+                    </div>
+            </div>
+
+            <div class="role__details__card" [hidden]="!isJobRolesOpen[$index]">
+                <div class="package__details">
+                    <h6>gross compensation package :</h6>
+                    <div>Rs. {{role.package}} lpa </div>
+                </div>
+                <hr/>
+                <div class="role__description">
+                    <h6>Role Description :</h6>
+                    @for (desc of role.roleDescription.split('- '); track $index) {
+                        @if (desc.length) {
+                            <div>- {{desc}}</div>
+                        }
+                    }
+                </div>
+                <hr/>
+                <div class="requirements">
+                    <h6>Requirements :</h6>
+                    @for (reqs of role.requirements.split('- '); track $index) {
+                        @if (reqs.length) {
+                            <div>- {{reqs}}</div>
+                        }
+                    }
+                </div>
+            </div>
+            
+        </div>
+    }
+</div>
+
+
 
 
