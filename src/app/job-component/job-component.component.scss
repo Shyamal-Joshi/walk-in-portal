@@ -1,0 +1,166 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+.job__details__and__prereuisites{
+    h6{
+        margin: 0;
+        font-size: $xsmall-font+px;
+        color: $sixth-color;
+    }
+    hr{
+        margin: 0;
+        border: 1px solid $border-12-color;
+        flex: 1;
+        width: 100%
+    }
+    box-shadow: 0px 4px 6px #0000003D;
+    margin: 26px 24px;
+    .pre__requisites{
+        background-color: #dbefff;
+        height: 40px;
+        padding: 10px 8px 10px 16px;
+        margin: 0 ;
+        box-sizing: border-box;
+        @include displayFlex(space-between,normal);
+        h1{
+            margin: 0;
+            font-size: 16px;
+        }
+        
+        .arrow__container{
+            @include displayFlex(space-between,center);
+            .splitter{
+                border: 1px solid $border-12-color;
+                height: 40px;
+
+            }
+            .arrow__icon{
+                color: $secondary-color;
+                margin-left: 8px;
+                // width: 12px;
+                height: 24px;
+                // font-size: 12px;
+                
+            }
+        }
+    }
+    .job__basic__details__card{
+    
+        background-color: $white-color;
+        
+        padding: 16px;
+        @include displayFlex(normal,normal);
+        flex-direction: column;
+        gap: 16px;
+    
+        
+        button{
+            background-color: $button-background-color;
+            border: none;
+            padding: 5px 16px;
+            text-decoration: none;
+            color: $primary-color;
+            font-family: quicksand;
+            font-weight: 600;
+            box-shadow: 0px 3px 5px #0000003D;
+            border-radius: 2px;
+            font-size: $small-font+px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        h1{
+            margin: 0;
+            font-size: 22px;
+        }
+        
+        .job__basic__details__title{
+            @include displayFlex(space-between,center);
+        }
+        .dateTime__and__location__container{
+            width: 261px;
+            .dateTime__and__location{
+                margin-top: 8px;
+                @include displayFlex(space-between,center);
+                .date{
+                    font-size: $small-font+px;
+                }
+                .splitter{
+                    border: 1px solid $border-12-color;
+                    height: 14px;
+                    // margin: 0 10px 0 8px;
+                }
+                .location{
+                    @include displayFlex(space-between,center);
+                    gap: 4px;
+                    >img{
+                        width: 16px;
+                    }
+                    font-size: $xsmall-font+px;
+                    color: $sixth-color;
+                }
+            }
+        }
+        .job__roles__container{
+            .job__roles{
+                margin-top: 8px;
+                @include displayFlex(normal,center);
+                gap: 8px;
+                .role{
+                    color: $secondary-color;
+                    .icondiv{
+                        @include displayFlex(center,center);
+                        padding: 4px;
+                        border-radius: 50%;
+                        border: 1px solid $black-color;
+                        img{
+                            height: 16px;
+                            width: 16px;
+                        }
+                    }
+                    font-size: $small-font+px;
+                    gap: 8px;
+                    @include displayFlex(normal,center);
+                    .splitter{
+                        border: 1px solid $border-12-color;
+                        height: 14px;
+                    }
+                }
+            }
+        }
+        
+    }
+    .pre__requisites__card{
+        background-color: $white-color;
+        padding: 16px;
+        h6{
+            margin-bottom: 16px;
+        }
+        font-size: 14px;
+        line-height: 24px;
+        hr{
+            margin: 16px 0;
+        }
+    }
+}
+
+
+
+
+@media (max-width:376px) {
+    .job__details__and__prereuisites{
+        .job__basic__details__card{
+            .job__roles__container{
+                .job__roles{
+                    @include displayFlex(normal,normal);
+                    flex-direction: column;
+                    .role{
+                        .splitter{
+                            display: none;
+                        }
+                    }
+                }
+            }
+    }
+    }
+    
+}

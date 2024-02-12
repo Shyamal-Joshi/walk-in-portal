@@ -44,7 +44,8 @@
                 </div>
             }
             <div class="view__more__btn__container">
-                <button class="view__more__btn">
+                <button [routerLink]="['/job',job.id]"
+                class="view__more__btn">
                     VIEW MORE DETAILS
                 </button>
             </div>

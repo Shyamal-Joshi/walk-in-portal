@@ -1,11 +1,12 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-job-listing',
   standalone: true,
-  imports: [MatIconModule],
+  imports: [MatIconModule,RouterLink],
   templateUrl: './job-listing.component.html',
   styleUrl: './job-listing.component.scss'
 })
