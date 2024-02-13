@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 
 
@@ -10,5 +10,5 @@ import { MatIcon } from '@angular/material/icon';
   styleUrl: './preview-profile.component.scss'
 })
 export class PreviewProfileComponent {
-
+  @Input() parentComponent!:any;
 }

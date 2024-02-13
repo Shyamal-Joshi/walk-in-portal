@@ -1,22 +1,25 @@
 <div class="personal__information__container">
     <div class="information__component">
-        <form class="personal__info__form" action="">
+        <form class="personal__info__form" action="" [formGroup]="personalInfoForm" (ngSubmit)="onSubmit()">
             <div class="first_name">
                 <label for="firstName">First Name*</label>
-                <input type="text" id="firstName">
+                <input type="text" id="firstName" formControlName="firstName">
             </div>
             <div class="last_name">
                 <label for="LastName">Last Name*</label>
-                <input type="text" id="LastName">
+                <input type="text" id="LastName"
+                formControlName="lastName">
             </div>
             <div class="email">
                 <label for="Email">Email</label>
-                <input type="email" id="Email">
+                <input type="email" id="Email"
+                formControlName="email">
             </div>
             <div class="phone_no">
                 <label for="phone_no">Phone Number*</label>
                 <div class="number">
-                    + <input type="tel" id="phone_no"> <input type="tel" id="phone_no">
+                    + <input type="tel" id=""> <input type="tel" id="phone_no" 
+                    formControlName="phoneNumber">
                 </div>
             </div>
             <div class="resume">
@@ -25,33 +28,38 @@
                     Upload Resume
                 </label>
                 
-                <input id="input_resume" type="file" accept=".pdf">
+                <input id="input_resume" type="file" accept=".pdf"
+                formControlName="resumePath">
             </div>
             <div class="portfolio_link">
                 <label for="portfolio_link">Enter Portfolio URL (if any)</label>
-                <input type="url" id="portfolio_link">
+                <input type="url" id="portfolio_link"
+                formControlName="portfolioUrl">
             </div>
             <div class="job_roles">
                 <label for="">Preferred Job Roles*</label>
                 <div class="input_jobRoles">
                     <div>
-                        <input type="checkbox" name="InstructionalDesigner" id="InstructionalDesigner" /> Instructional Designer
+                        <input type="checkbox" (change)="onChange($event)" value="InstructionalDesigner" id="InstructionalDesigner" /> Instructional Designer
                     </div>
                     <div>
-                        <input type="checkbox" name="SoftwareEngineer" id="SoftwareEngineer" /> Software Engineer
+                        <input type="checkbox" (change)="onChange($event)" value="SoftwareEngineer" id="SoftwareEngineer" /> 
+                        Software Engineer
                     </div>
                     <div>
-                        <input type="checkbox" name="SoftwareQualityEngineer" id="SoftwareQualityEngineer" /> Software Quality Engineer
+                        <input type="checkbox" (change)="onChange($event)" value="SoftwareQualityEngineer" id="SoftwareQualityEngineer" /> Software Quality Engineer
                     </div>
                 </div>
             </div>
             <div class="referral_name">
                 <label for="input_referral" class="referralName">If You Are Registering Via A Referral, Please Mention Full Name Of The Employee Who Referred You</label>
-                <input type="text" id="input_referral">
+                <input type="text" id="input_referral"
+                formControlName="referralName">
             </div>
             <div class="newsletter">
                 <div>
-                    <input type="checkbox" name="input_newsletter" id="input_newsletter" /> Send me job related updates via mail
+                    <input type="checkbox" name="input_newsletter" id="input_newsletter" 
+                    formControlName="newsletter"/> Send me job related updates via mail
                 </div>
             </div>
         </form>
@@ -61,4 +69,8 @@
         <div class="user__image__heading">UPLOAD DISPLAY PICTURE</div>
         <div class="user__image__info">Max. image size: 5 MB</div>
     </div>
+</div>
+
+<div class="next__and__previous__btns">
+    <button (click)="onSubmit()" (click)="this.parentComponent.moveToNextStep()">Next</button>
 </div>

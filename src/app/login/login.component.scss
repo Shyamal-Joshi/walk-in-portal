@@ -1,6 +1,10 @@
 @import "../../scss/variables";
 @import "../../scss/mixins";
 
+span{
+    position: absolute;
+}
+
 .login__container{
     height: 92vh;
     @include displayFlex(center,center);

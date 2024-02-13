@@ -7,30 +7,63 @@
     </div>
     <div class="registration__header__buttons">
         <button class="btn">Cancel</button>
-        <button class="btn" [disabled]="isDisable" >Create</button>
+        <button class="btn" [disabled]="isDisable">Create</button>
     </div>
 </div>
 
 <div class="registration__progress">
     <div class="registration__steps">
-        <span [ngClass]="{step_count: true}">
-            <!-- <mat-icon>edit</mat-icon> -->
-            1
+        <span [ngClass]="{step_count: true,already_completed:idCompletedThisStep(1)}">
+            @if (currentStep>1) {
+                <mat-icon>edit</mat-icon>
+            }
+            @else {1}
         </span>
         <span>Personal Information</span>
     </div>
     <hr/>
     <div class="registration__steps">
-        <span [ngClass]="{step_count: true}">2</span>
+        <span [ngClass]="{step_count: true,already_completed:idCompletedThisStep(2)}">
+            @if (currentStep>2) {
+                <mat-icon>edit</mat-icon>
+            }
+            @else {2}
+        </span>
         <span>Qualifications</span>
     </div>
     <hr/>
     <div class="registration__steps">
-        <span [ngClass]="{step_count: true}">3</span>
+        <span [ngClass]="{step_count: true,already_completed:idCompletedThisStep(3)}">
+            @if (currentStep>3) {
+                <mat-icon>edit</mat-icon>
+            }
+            @else {3}
+        </span>
         <span>Review and Proceed</span>
     </div>
 </div>
 
-<!-- <app-personal-information></app-personal-information> -->
-<!-- <app-qualifications></app-qualifications> -->
-<app-preview-profile></app-preview-profile>
+@if (currentStep===1) {
+    <div [formGroup]="personalInformation">   
+        <app-personal-information [parentComponent]="this"></app-personal-information>
+    </div>
+    
+}
+@else if (currentStep===2) {
+    <app-qualifications [parentComponent]="this"></app-qualifications>
+}
+@else {
+    <app-preview-profile [parentComponent]="this"></app-preview-profile>
+}
+
+<!-- <div class="next__and__previous__btns">
+    @if(currentStep!=1){
+        <button (click)="moveToPreviousStep()">Previous</button>
+    }
+    @if (currentStep!=3) {
+        <button (click)="moveToNextStep()">Next</button>
+    }
+    
+</div> -->
+
+
