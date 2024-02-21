@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\walk-in-portal_Backend.props" />
+</Project>
