@@ -6,10 +6,6 @@ namespace walk_in_portal_Backend.Models;
 
 public partial class DbWalkInPortalContext : DbContext
 {
-    public DbWalkInPortalContext()
-    {
-    }
-
     public DbWalkInPortalContext(DbContextOptions<DbWalkInPortalContext> options)
         : base(options)
     {
@@ -53,8 +49,8 @@ public partial class DbWalkInPortalContext : DbContext
 
     public virtual DbSet<TblWalkInApplicationTimeSlot> TblWalkInApplicationTimeSlots { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseMySQL("Name=ConnectionStrings:default");
+    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //     => optionsBuilder.UseMySQL("ConnectionStrings:default");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
