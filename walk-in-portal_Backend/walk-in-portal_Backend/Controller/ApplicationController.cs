@@ -94,7 +94,7 @@ namespace walk_in_portal_Backend.Controller
                 .ToListAsync();
             
 
-            var UpdatedTimeSlot = new List<Dictionary<string, object>>();
+            var updatedTimeSlot = new List<Dictionary<string, object>>();
 
             foreach (var slots in timeSlot)
             {
@@ -106,43 +106,42 @@ namespace walk_in_portal_Backend.Controller
                     endTime.Add(Convert.ToString(subSlots.end_time));
                 }
 
-                UpdatedTimeSlot.Add(new Dictionary<string, object>
+                updatedTimeSlot.Add(new Dictionary<string, object>
                 {
                     { "start_time", startTime },
                     { "end_time", endTime }
                 });
             }
             
-            var UpdatedApplication = new List<Dictionary<string, object>>();
+            var updatedApplication = new List<Dictionary<string, object>>();
 
             foreach (var innerList in applications)
             {
-                var jobRoles = new List<string>();
+                var jobRolesWithDetails = new List<Dictionary<string, object>>();
                 object application=new TblWalkInApplication();
-                var jobRequirements = new List<String>();
-                var jobDescriptions = new List<String>();
-                var package=new List<string>();
                 foreach (var item in innerList)
                 {
-                    jobRoles.Add(item.job_role);
-                    jobRequirements.Add(item.role_requirements);
-                    jobDescriptions.Add(item.role_descriptions);
-                    package.Add(item.package);
+                    jobRolesWithDetails.Add(
+                        new Dictionary<string, object>
+                        {
+                            { "job_role", item.job_role },
+                            { "requirements", item.role_requirements },
+                            { "roleDescription", item.role_descriptions },
+                            { "package", item.package }
+                        }
+                    );
                     application = item.application;
                 }
                 
-                UpdatedApplication.Add(new Dictionary<string, object>
+                updatedApplication.Add(new Dictionary<string, object>
                 {
-                    { "job_role", jobRoles },
                     { "application", application},
-                    { "job_requirements", jobRequirements},
-                    { "job_descriptions", jobDescriptions},
-                    { "package", package},
-                    { "time_slot", UpdatedTimeSlot[0]}
+                    { "jobRoleWithDetails", jobRolesWithDetails},
+                    { "time_slot", updatedTimeSlot[0]}
                 });
             }
             
-            return Ok(UpdatedApplication);
+            return Ok(updatedApplication);
         }
     }
 }
