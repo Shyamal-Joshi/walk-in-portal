@@ -1,51 +1,67 @@
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
-using MySqlConnector;
 using walk_in_portal_Backend.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-// builder.Services.AddMySqlDataSource(builder.Configuration.GetConnectionString("Default")!);
 
+// Add services to the container.
 
+builder.Services.AddControllers();
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
+
+//For connecting database
 var connectionString = builder.Configuration.GetConnectionString("Default");
 builder.Services.AddDbContext<DbWalkInPortalContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
+// for allowing all incoming requests to this web api even from frontend.
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
-
-// using var connection = new MySqlConnection(builder.Configuration.GetConnectionString("Default")!);
-//
-//
-// await connection.OpenAsync();
-//
-// using var command = new MySqlCommand("SELECT * FROM tbl_job_roles;", connection);
-// using var reader = await command.ExecuteReaderAsync();
-//
-// app.MapGet("/demo", async () =>
-// {
-//     
-//     
-//     return reader;
-// });
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/home/error");
-    app.UseHsts();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
+
+
+// to use cors.
+app.UseCors();
+
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
-app.MapGet("/demo", async (DbWalkInPortalContext dbContext) =>
-{
-    var result = await dbContext.TblJobRoleDetails.ToListAsync();
-    return Results.Ok(result);
-});
+app.UseAuthentication();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+// app.MapGet("/demo", async (DbWalkInPortalContext dbContext) =>
+// {
+//     var result = await dbContext.TblJobRoleDetails.ToListAsync();
+//     return result;
+// });
+
+
 
 app.Run();
 
