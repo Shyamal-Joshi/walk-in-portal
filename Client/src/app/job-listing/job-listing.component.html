@@ -1,20 +1,20 @@
 <div class="listing__container">
-    @for(job of jobs;track job.id){
+    @for(job of Jobs;track job.application_id){
         <div class="job__card">
-            @if(job.isExpiring){
-                <div class="expiring__tag"> {{job.isExpiringTitle}} </div>
+            @if(CalculateTimeDiffrence(job.application.start_date,job.application.end_date)){
+                <div class="expiring__tag">Expires in {{CalculateTimeDiffrence(job.application.start_date,job.application.end_date)}} days</div>
             }
             <h3>
-                {{job.title}}
+                {{job.application.title}}
             </h3>
             <div class="dateTime__and__location__container">
                 <h6>Date & Time :</h6>
                 <div class="dateTime__and__location">
-                    <div class="date"> {{job.startDate}} to {{job.endDate}} </div>
+                    <div class="date"> {{ConvertDateFormate(job.application.start_date)}} to {{ConvertDateFormate(job.application.end_date)}} </div>
                     <div class="splitter"></div>
                     <div class="location">
                         <img src="../../assets/icons/location_on_grey_24dp.svg" alt="">
-                        {{job.location}}
+                        {{job.application.location}}
                     </div>
                 </div>
             </div>
@@ -22,29 +22,29 @@
             <div class="job__roles__container">
                 <h6>Job Roles :</h6>
                 <div class="job__roles">
-                    @for(role of job.job_roles;track $index){
+                    @for(role of job.job_role;track $index){
                         <div class="role">
                             <div class="icondiv">
                                 <img src="../../assets/icons/Instructional Designer.svg" alt="">
                             </div>
                             
                             <span> {{role}} </span>
-                            @if(job.job_roles.length>1 && $index<job.job_roles.length-1){
+                            @if(job.job_role.length>1 && $index<job.job_role.length-1){
                                 <div class="splitter"></div>
                             }
                         </div>
                     }
                 </div>
             </div>
-            @if(job.isExtraTag){
+            @if(job.application.additionalInformation){
                 <div class="extra__job__container">
                     <span class="extra__job__tag">
-                        {{job.isExtraTagTitle}}
+                        {{job.application.additionalInformation}}
                     </span>
                 </div>
             }
             <div class="view__more__btn__container">
-                <button [routerLink]="['/job',job.id]"
+                <button [routerLink]="['/job',job.application_id]"
                 class="view__more__btn">
                     VIEW MORE DETAILS
                 </button>

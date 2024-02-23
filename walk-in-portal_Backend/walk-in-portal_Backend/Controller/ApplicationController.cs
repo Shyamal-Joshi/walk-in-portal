@@ -31,16 +31,29 @@ namespace walk_in_portal_Backend.Controller
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetApplication()
         {
+            Console.Write("Hello");
             var result = await  _appDbContext.TblJobRoleDetails.Select(c => new
             {
                 application_id = c.WalkInApplicationId,
-                application = c.WalkInApplication,
+                application = new
+                {
+                    title=c.WalkInApplication.Title,
+                    location=c.WalkInApplication.Location,
+                    additionalInformation=c.WalkInApplication.AdditionalInformation,
+                    general_instruction=c.WalkInApplication.GeneralInstruction,
+                    exam_instruction=c.WalkInApplication.ExamInstruction,
+                    systemRequirements=c.WalkInApplication.SystemRequirements,
+                    application_process=c.WalkInApplication.ApplicationProcess,
+                    start_date=c.WalkInApplication.StartDate,
+                    end_date=c.WalkInApplication.EndDate,
+                },
                 job_role=c.JobRole.JobName,
-            }).GroupBy(c=> c.application_id).ToListAsync(); 
+            }).GroupBy(c=> c.application_id).ToListAsync();
+            
             
             
             var final = new List<Dictionary<string, object>>();
-
+            
             foreach (var innerList in result)
             {
                 var applicationId = 0;
@@ -73,7 +86,18 @@ namespace walk_in_portal_Backend.Controller
                 .Select(c => new
                 {
                     application_id = c.WalkInApplicationId,
-                    application = c.WalkInApplication,
+                    application = new
+                    {
+                        title=c.WalkInApplication.Title,
+                        location=c.WalkInApplication.Location,
+                        additionalInformation=c.WalkInApplication.AdditionalInformation,
+                        general_instruction=c.WalkInApplication.GeneralInstruction,
+                        exam_instruction=c.WalkInApplication.ExamInstruction,
+                        systemRequirements=c.WalkInApplication.SystemRequirements,
+                        application_process=c.WalkInApplication.ApplicationProcess,
+                        start_date=c.WalkInApplication.StartDate,
+                        end_date=c.WalkInApplication.EndDate,
+                    },
                     job_role = c.JobRole.JobName,
                     role_requirements = c.RoleRequirements,
                     role_descriptions = c.RoleDescription,
@@ -117,6 +141,7 @@ namespace walk_in_portal_Backend.Controller
 
             foreach (var innerList in applications)
             {
+                var applicationId = 0;
                 var jobRolesWithDetails = new List<Dictionary<string, object>>();
                 object application=new TblWalkInApplication();
                 foreach (var item in innerList)
@@ -131,10 +156,12 @@ namespace walk_in_portal_Backend.Controller
                         }
                     );
                     application = item.application;
+                    applicationId=item.application_id;
                 }
                 
                 updatedApplication.Add(new Dictionary<string, object>
                 {
+                    {"application_id", applicationId},
                     { "application", application},
                     { "jobRoleWithDetails", jobRolesWithDetails},
                     { "time_slot", updatedTimeSlot[0]}

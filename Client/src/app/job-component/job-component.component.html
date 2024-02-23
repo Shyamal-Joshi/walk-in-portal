@@ -1,32 +1,32 @@
 <div class="job__details__and__prereuisites">
     <div class="job__basic__details__card">
         <div class="job__basic__details__title">
-            <h1> {{job.title}} </h1>
+            <h1> {{DriveDetails[0].application.title}} </h1>
             <button>Apply</button>
         </div>
         <div class="dateTime__and__location__container">
             <h6>Date & Time :</h6>
-            <div class="dateTime__and__location">
-                <div class="date"> {{job.startDate}} to {{job.endDate}} </div>
+            <!-- <div class="dateTime__and__location">
+                <div class="date"> {{Jobs.startDate}} to {{Jobs.endDate}} </div>
                 <div class="splitter"></div>
                 <div class="location">
                     <img src="../../assets/icons/location_on_grey_24dp.svg" alt="">
-                    {{job.location}}
+                    {{Jobs.location}}
                 </div>
-            </div>
+            </div> -->
         </div>
         <hr>
         <div class="job__roles__container" >
             <h6>Job Roles :</h6>
             <div class="job__roles">
-                @for(role of job.jobRoleWithDetails;track $index){
+                @for(role of DriveDetails[0].jobRoleWithDetails;track $index){
                     <div class="role">
                         <div class="icondiv">
                             <img src="../../assets/icons/Instructional Designer.svg" alt="">
                         </div>
                         
                         <span> {{role.job_role}} </span>
-                        @if(job.jobRoleWithDetails.length>1 && $index<job.jobRoleWithDetails.length-1){
+                        @if(DriveDetails[0].jobRoleWithDetails.length>1 && $index<DriveDetails[0].jobRoleWithDetails.length-1){
                             <div class="splitter"></div>
                         }
                     </div>
@@ -52,7 +52,7 @@
     <div class="pre__requisites__card"  [hidden]="!isPreRequisitesOpen">
         <div class="general__instructions">
             <h6>General Instructions :</h6>
-            @for (instruction of job.generalInstructions.split('- '); track $index) {
+            @for (instruction of DriveDetails[0].application.general_instruction?.split('- '); track $index) {
                 @if (instruction.length) {
                     <div> - {{instruction}}</div>
                 }
@@ -61,7 +61,7 @@
         <hr>
         <div class="exam__instructions">
             <h6>Instructions for the Exam :</h6>
-            @for (instruction of job.instructionsForTheExam.split('- '); track $index) {
+            @for (instruction of DriveDetails[0].application.exam_instruction?.split('- '); track $index) {
                 @if (instruction.length) {
                     <div> - {{instruction}}</div>
                 }
@@ -70,7 +70,7 @@
         <hr>
         <div class="system__requirements">
             <h6>Minimum System Requirements :</h6>
-            @for (requirements of job.minimumSystemRequirements.split('- '); track $index) {
+            @for (requirements of DriveDetails[0].application.systemRequirements?.split('- '); track $index) {
                 @if (requirements.length) {
                     <div> - {{requirements}}</div>
                 }
@@ -79,7 +79,7 @@
         <hr>
         <div class="process">
             <h6>Process :</h6>
-            @for (requirements of job.process.split('- '); track $index) {
+            @for (requirements of DriveDetails[0].application.application_process?.split('- '); track $index) {
                 @if (requirements.length) {
                     <div> - {{requirements}}</div>
                 }
@@ -93,18 +93,18 @@
     <div class="time__slot">
         <label>Select a Time Slot :</label>
         <div class="time__radios">
-            @for (time of job.timeSlots; track $index) {
+            <!-- @for (time of job.timeSlots; track $index) {
                 <div>
                     <input type="radio" name="application" id="fresher">{{time}}
                 </div>
-            }
+            } -->
         </div>
     </div>
     <hr>
     <div class="preferences">
         <label for="">Select Your Preference :</label>
         <div class="input__preferences">
-            @for (role of job.jobRoleWithDetails; track $index) {
+            @for (role of DriveDetails[0].jobRoleWithDetails; track $index) {
                 <div>
                     <input type="checkbox" [name]="'role'+$index+1" [id]="'role'+$index+1" [value]="role.job_role"/> {{role.job_role}}
                 </div>
@@ -123,7 +123,7 @@
 </div>
 
 <div class="roles">
-    @for (role of job.jobRoleWithDetails; track $index) {
+    @for (role of DriveDetails[0].jobRoleWithDetails; track $index) {
         <div class="role__component">
             <div class="role__component__header">
                 <h1>{{role.job_role}}</h1>
