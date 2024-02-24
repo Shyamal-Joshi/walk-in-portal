@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { UserDataService } from '../services/user-data.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,7 @@ export class LoginComponent {
     rememberMe:''
   })
   isSubmitted=false;
-  constructor(private fb:FormBuilder){}
+  constructor(private fb:FormBuilder,private UserService:UserDataService,private router:Router){}
 
   togglePassword(){
     this.passwordType === this._passType 
@@ -30,7 +31,18 @@ export class LoginComponent {
   }
 
   onSubmit():void{
-    console.log('Submited form ',this.loginForm.value);
-    
+    // console.log('Submited form ',this.loginForm.value);
+  }
+
+  onLogin(){
+    const email = this.loginForm.value.email;
+    const password = this.loginForm.value.password;
+
+    this.UserService.login(email!,password!).subscribe((result)=>{
+      console.log(result);
+      localStorage.setItem("token",result.token);
+    })
+
+    this.router.navigateByUrl('/jobs')
   }
 }

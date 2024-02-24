@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using walk_in_portal_Backend.Models;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Org.BouncyCastle.Asn1.X509;
 
 namespace walk_in_portal_Backend.Controller
@@ -79,6 +80,7 @@ namespace walk_in_portal_Backend.Controller
 
         [HttpGet("getDrive/{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [Authorize]
         public async Task<IActionResult> GetDrive(int id)
         {
             var applications = await _appDbContext.TblJobRoleDetails
