@@ -1,174 +1,177 @@
-<div class="job__details__and__prereuisites">
-    <div class="job__basic__details__card">
-        <div class="job__basic__details__title">
-            <h1> {{DriveDetails[0].application.title}} </h1>
-            <button>Apply</button>
-        </div>
-        <div class="dateTime__and__location__container">
-            <h6>Date & Time :</h6>
-            <!-- <div class="dateTime__and__location">
-                <div class="date"> {{Jobs.startDate}} to {{Jobs.endDate}} </div>
-                <div class="splitter"></div>
-                <div class="location">
-                    <img src="../../assets/icons/location_on_grey_24dp.svg" alt="">
-                    {{Jobs.location}}
+
+
+@if (DriveDetails && DriveDetails.length > 0) {
+    <div class="job__details__and__prereuisites">
+        <div class="job__basic__details__card">
+            <div class="job__basic__details__title">
+                <h1> {{DriveDetails[0].application.title}} </h1>
+                <button>Apply</button>
+            </div>
+            <div class="dateTime__and__location__container">
+                <h6>Date & Time :</h6>
+                <div class="dateTime__and__location">
+                    <div class="date"> {{DriveDetails[0].application.start_date | transformDate}} to {{DriveDetails[0].application.end_date | transformDate}} </div>
+                    <div class="splitter"></div>
+                    <div class="location">
+                        <img src="../../assets/icons/location_on_grey_24dp.svg" alt="">
+                        {{DriveDetails[0].application.location}}
+                    </div>
                 </div>
-            </div> -->
-        </div>
-        <hr>
-        <div class="job__roles__container" >
-            <h6>Job Roles :</h6>
-            <div class="job__roles">
-                @for(role of DriveDetails[0].jobRoleWithDetails;track $index){
-                    <div class="role">
-                        <div class="icondiv">
-                            <img src="../../assets/icons/Instructional Designer.svg" alt="">
+            </div>
+            <hr>
+            <div class="job__roles__container" >
+                <h6>Job Roles :</h6>
+                <div class="job__roles">
+                    @for(role of DriveDetails[0].jobRoleWithDetails;track $index){
+                        <div class="role">
+                            <div class="icondiv">
+                                <img src="../../assets/icons/Instructional Designer.svg" alt="">
+                            </div>
+                            
+                            <span> {{role.job_role}} </span>
+                            @if(DriveDetails[0].jobRoleWithDetails.length>1 && $index<DriveDetails[0].jobRoleWithDetails.length-1){
+                                <div class="splitter"></div>
+                            }
                         </div>
-                        
-                        <span> {{role.job_role}} </span>
-                        @if(DriveDetails[0].jobRoleWithDetails.length>1 && $index<DriveDetails[0].jobRoleWithDetails.length-1){
+                    }
+                </div>
+            </div>
+            
+        </div>
+        <div class="pre__requisites">
+            <h1>Pre-requisites & Application Process</h1>
+                <div class="arrow__container" (click)="tooglePreRequisitesOpen()">
+                    <div class="splitter"></div>
+                    <mat-icon class="arrow__icon" >
+                        @if(isPreRequisitesOpen){
+                            expand_less
+                        }
+                        @else{
+                            expand_more
+                        }
+                    </mat-icon>
+                </div>
+        </div>
+        <div class="pre__requisites__card"  [hidden]="!isPreRequisitesOpen">
+            <div class="general__instructions">
+                <h6>General Instructions :</h6>
+                @for (instruction of DriveDetails[0].application.general_instruction?.split('- '); track $index) {
+                    @if (instruction.length) {
+                        <div> - {{instruction}}</div>
+                    }
+                }
+            </div>
+            <hr>
+            <div class="exam__instructions">
+                <h6>Instructions for the Exam :</h6>
+                @for (instruction of DriveDetails[0].application.exam_instruction?.split('- '); track $index) {
+                    @if (instruction.length) {
+                        <div> - {{instruction}}</div>
+                    }
+                }
+            </div>
+            <hr>
+            <div class="system__requirements">
+                <h6>Minimum System Requirements :</h6>
+                @for (requirements of DriveDetails[0].application.systemRequirements?.split('- '); track $index) {
+                    @if (requirements.length) {
+                        <div> - {{requirements}}</div>
+                    }
+                }
+            </div>
+            <hr>
+            <div class="process">
+                <h6>Process :</h6>
+                @for (requirements of DriveDetails[0].application.application_process?.split('- '); track $index) {
+                    @if (requirements.length) {
+                        <div> - {{requirements}}</div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    
+    <div class="time__slots__and__preference">
+        <h1>Time Slots & Preferences</h1>
+        <div class="time__slot">
+            <label>Select a Time Slot :</label>
+            <div class="time__radios">
+                @for (time of DriveDetails[0].time_slot.timestamp; track $index) {
+                    <div>
+                        <input type="radio" name="application" id="fresher">{{time.start_time | transformTime}} to {{time.end_time | transformTime}}
+                    </div>
+                }
+            </div>
+        </div>
+        <hr>
+        <div class="preferences">
+            <label for="">Select Your Preference :</label>
+            <div class="input__preferences">
+                @for (role of DriveDetails[0].jobRoleWithDetails; track $index) {
+                    <div>
+                        <input type="checkbox" [name]="'role'+$index+1" [id]="'role'+$index+1" [value]="role.job_role"/> {{role.job_role}}
+                    </div>
+                }
+                
+            </div>
+        </div>
+        <hr>
+        <div class="resume">
+            <label for="input_resume">
+                <img src="../../assets/icons/Upload_black_24dp.svg" alt="">
+                Upload Resume
+            </label>
+            <input id="input_resume" type="file" accept=".pdf">
+        </div>
+    </div>
+    
+    <div class="roles">
+        @for (role of DriveDetails[0].jobRoleWithDetails; track $index) {
+            <div class="role__component">
+                <div class="role__component__header">
+                    <h1>{{role.job_role}}</h1>
+                        <div class="arrow__container" (click)="toogleisJobRolesOpen($index)">
                             <div class="splitter"></div>
+                            <mat-icon class="arrow__icon" >
+                                @if(isJobRolesOpen[$index]){
+                                    expand_less
+                                }
+                                @else{
+                                    expand_more
+                                }
+                            </mat-icon>
+                        </div>
+                </div>
+    
+                <div class="role__details__card" [hidden]="!isJobRolesOpen[$index]">
+                    <div class="package__details">
+                        <h6>gross compensation package :</h6>
+                        <div>Rs. {{role.package}} lpa </div>
+                    </div>
+                    <hr/>
+                    <div class="role__description">
+                        <h6>Role Description :</h6>
+                        @for (desc of role.roleDescription.split('- '); track $index) {
+                            @if (desc.length) {
+                                <div>- {{desc}}</div>
+                            }
                         }
                     </div>
-                }
-            </div>
-        </div>
-        
-    </div>
-    <div class="pre__requisites">
-        <h1>Pre-requisites & Application Process</h1>
-            <div class="arrow__container" (click)="tooglePreRequisitesOpen()">
-                <div class="splitter"></div>
-                <mat-icon class="arrow__icon" >
-                    @if(isPreRequisitesOpen){
-                        expand_less
-                    }
-                    @else{
-                        expand_more
-                    }
-                </mat-icon>
-            </div>
-    </div>
-    <div class="pre__requisites__card"  [hidden]="!isPreRequisitesOpen">
-        <div class="general__instructions">
-            <h6>General Instructions :</h6>
-            @for (instruction of DriveDetails[0].application.general_instruction?.split('- '); track $index) {
-                @if (instruction.length) {
-                    <div> - {{instruction}}</div>
-                }
-            }
-        </div>
-        <hr>
-        <div class="exam__instructions">
-            <h6>Instructions for the Exam :</h6>
-            @for (instruction of DriveDetails[0].application.exam_instruction?.split('- '); track $index) {
-                @if (instruction.length) {
-                    <div> - {{instruction}}</div>
-                }
-            }
-        </div>
-        <hr>
-        <div class="system__requirements">
-            <h6>Minimum System Requirements :</h6>
-            @for (requirements of DriveDetails[0].application.systemRequirements?.split('- '); track $index) {
-                @if (requirements.length) {
-                    <div> - {{requirements}}</div>
-                }
-            }
-        </div>
-        <hr>
-        <div class="process">
-            <h6>Process :</h6>
-            @for (requirements of DriveDetails[0].application.application_process?.split('- '); track $index) {
-                @if (requirements.length) {
-                    <div> - {{requirements}}</div>
-                }
-            }
-        </div>
-    </div>
-</div>
-
-<div class="time__slots__and__preference">
-    <h1>Time Slots & Preferences</h1>
-    <div class="time__slot">
-        <label>Select a Time Slot :</label>
-        <div class="time__radios">
-            <!-- @for (time of job.timeSlots; track $index) {
-                <div>
-                    <input type="radio" name="application" id="fresher">{{time}}
-                </div>
-            } -->
-        </div>
-    </div>
-    <hr>
-    <div class="preferences">
-        <label for="">Select Your Preference :</label>
-        <div class="input__preferences">
-            @for (role of DriveDetails[0].jobRoleWithDetails; track $index) {
-                <div>
-                    <input type="checkbox" [name]="'role'+$index+1" [id]="'role'+$index+1" [value]="role.job_role"/> {{role.job_role}}
-                </div>
-            }
-            
-        </div>
-    </div>
-    <hr>
-    <div class="resume">
-        <label for="input_resume">
-            <img src="../../assets/icons/Upload_black_24dp.svg" alt="">
-            Upload Resume
-        </label>
-        <input id="input_resume" type="file" accept=".pdf">
-    </div>
-</div>
-
-<div class="roles">
-    @for (role of DriveDetails[0].jobRoleWithDetails; track $index) {
-        <div class="role__component">
-            <div class="role__component__header">
-                <h1>{{role.job_role}}</h1>
-                    <div class="arrow__container" (click)="toogleisJobRolesOpen($index)">
-                        <div class="splitter"></div>
-                        <mat-icon class="arrow__icon" >
-                            @if(isJobRolesOpen[$index]){
-                                expand_less
+                    <hr/>
+                    <div class="requirements">
+                        <h6>Requirements :</h6>
+                        @for (reqs of role.requirements.split('- '); track $index) {
+                            @if (reqs.length) {
+                                <div>- {{reqs}}</div>
                             }
-                            @else{
-                                expand_more
-                            }
-                        </mat-icon>
+                        }
                     </div>
+                </div>
+                
             </div>
-
-            <div class="role__details__card" [hidden]="!isJobRolesOpen[$index]">
-                <div class="package__details">
-                    <h6>gross compensation package :</h6>
-                    <div>Rs. {{role.package}} lpa </div>
-                </div>
-                <hr/>
-                <div class="role__description">
-                    <h6>Role Description :</h6>
-                    @for (desc of role.roleDescription.split('- '); track $index) {
-                        @if (desc.length) {
-                            <div>- {{desc}}</div>
-                        }
-                    }
-                </div>
-                <hr/>
-                <div class="requirements">
-                    <h6>Requirements :</h6>
-                    @for (reqs of role.requirements.split('- '); track $index) {
-                        @if (reqs.length) {
-                            <div>- {{reqs}}</div>
-                        }
-                    }
-                </div>
-            </div>
-            
-        </div>
-    }
-</div>
-
+        }
+    </div>
+}
 
 
 

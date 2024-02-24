@@ -122,18 +122,19 @@ namespace walk_in_portal_Backend.Controller
 
             foreach (var slots in timeSlot)
             {
-                var startTime = new List<string>();
-                var endTime = new List<string>();
+                var times = new List<Dictionary<string, object>>();
                 foreach (var subSlots in slots)
                 {
-                    startTime.Add(Convert.ToString(subSlots.start_time));
-                    endTime.Add(Convert.ToString(subSlots.end_time));
+                    times.Add(new Dictionary<string,object>
+                    {
+                        {"start_time", Convert.ToString(subSlots.start_time)},
+                        {"end_time", Convert.ToString(subSlots.end_time)}
+                    });
                 }
 
                 updatedTimeSlot.Add(new Dictionary<string, object>
                 {
-                    { "start_time", startTime },
-                    { "end_time", endTime }
+                    {"timestamp", times},
                 });
             }
             

@@ -1,3 +1,5 @@
+import { Time } from "@angular/common"
+
 export interface IDrivesdata{
     application_id : number,
     job_role: string[],
@@ -31,6 +33,10 @@ export interface IJobDetails{
 }
 
 export interface ITimeSlot{
-    start_time:Date[],
-    end_time:Date[]
+    timestamp: [
+        {
+            start_time:string,
+            end_time:string,
+        }
+    ]
 }

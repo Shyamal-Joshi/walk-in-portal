@@ -5,11 +5,12 @@ import { IDrivesdata } from '../interface';
 import { DriveDataService } from '../services/drive-data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { TransformDatePipe } from '../Pipes/trasform-date.pipe';
 
 @Component({
   selector: 'app-job-listing',
   standalone: true,
-  imports: [MatIconModule,RouterLink,HttpClientModule],
+  imports: [MatIconModule,RouterLink,HttpClientModule,TransformDatePipe],
   templateUrl: './job-listing.component.html',
   styleUrl: './job-listing.component.scss',
   providers:[DriveDataService,DatePipe]
@@ -25,12 +26,6 @@ export class JobListingComponent implements OnInit{
       this.Jobs = data;
     })
   }
-
-  ConvertDateFormate(inputDate:Date){
-    return this.datePipe.transform(inputDate, 'dd-MMMM-yyyy');
-  }
-  
-
   CalculateTimeDiffrence(start_date:Date , end_date:Date){
     const startDate=new Date(start_date);
     const endDate=new Date(end_date);

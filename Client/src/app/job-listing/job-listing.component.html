@@ -10,7 +10,7 @@
             <div class="dateTime__and__location__container">
                 <h6>Date & Time :</h6>
                 <div class="dateTime__and__location">
-                    <div class="date"> {{ConvertDateFormate(job.application.start_date)}} to {{ConvertDateFormate(job.application.end_date)}} </div>
+                    <div class="date"> {{job.application.start_date | transformDate}} to {{job.application.end_date | transformDate}} </div>
                     <div class="splitter"></div>
                     <div class="location">
                         <img src="../../assets/icons/location_on_grey_24dp.svg" alt="">
