@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,4 +17,25 @@ export class UserDataService {
       password:password
     })
   }
+
+  getJobRoleNames():Observable<string[]>{
+    return this.http.get<string[]>(this._baseUrl+'v1/getJobRoles');
+  }
+
+  getQualification():Observable<string[]>{
+    return this.http.get<string[]>(this._baseUrl+'v1/getQualifications');
+  }
+
+  getColleges():Observable<string[]>{
+    return this.http.get<string[]>(this._baseUrl+'v1/getColleges');
+  }
+
+  getStreams():Observable<string[]>{
+    return this.http.get<string[]>(this._baseUrl+'v1/getStreams');
+  }
+
+  getTechnologies():Observable<string[]>{
+    return this.http.get<string[]>(this._baseUrl+'v1/getTechnologies');
+  }
+
 }

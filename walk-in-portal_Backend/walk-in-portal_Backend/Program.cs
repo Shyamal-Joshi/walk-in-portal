@@ -14,6 +14,8 @@ builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+//enabling swagger and allowing swagger to accept authorization token
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo() { Title = "Test01", Version = "v1" });
@@ -63,9 +65,10 @@ builder.Services.AddCors(options =>
         });
 });
 
-// builder.Services.Configure<string>(builder.Configuration.GetSection("JwtKey"));
+//getting vvalue of key from appsetting.json
 var key = builder.Configuration.GetSection("Jwt:key").Get<string>();
-Console.WriteLine(key);
+
+//adding authentication pipeline
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -106,12 +109,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
-// app.MapGet("/demo", async (DbWalkInPortalContext dbContext) =>
-// {
-//     var result = await dbContext.TblJobRoleDetails.ToListAsync();
-//     return result;
-// });
 
 
 

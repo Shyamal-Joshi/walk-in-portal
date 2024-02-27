@@ -36,8 +36,33 @@ export class UserRegistrationComponent {
     newsletter:new FormControl(false),
   });
 
+  EducationalQualification= new FormGroup({
+    aggregatedPercentage:new FormControl('',[Validators.required]),
+    yearOfPassing:new FormControl('2021',[Validators.required]),
+    qualification:new FormControl('',[Validators.required]),
+    stream:new FormControl('',[Validators.required]),
+    college:new FormControl('',[Validators.required]),
+    otherCollege:new FormControl(''),
+    collegeLocation:new FormControl('',[Validators.required]),
+  })
+
+  professionalQualification = new FormGroup({
+    applicationType: new FormControl('fresher', [Validators.required]),
+    familiarTechnologies: new FormArray([], [Validators.required]),
+    otherFamiliarTechnologies: new FormControl(''),
+    previouslyApplied: new FormControl(false),
+    previouslyAppliedRole: new FormControl(''),
+    yearsOfExperience: new FormControl('', [Validators.required]),
+    currentCtc: new FormControl('', [Validators.required]),
+    expectedCtc: new FormControl('', [Validators.required]),
+    expertiseTechnology: new FormArray([]),
+    otherExpertiseTechnology: new FormControl(''),
+    noticePeriod: new FormControl(false),
+    noticePeriodDuration: new FormControl(''),
+    noticePeriodDate: new FormControl(''),
+  });
+
   moveToNextStep():void {
-    console.log(this.currentStep);
     this.currentStep++;
     if (this.currentStep === 3) this.isDisable = false;
     
@@ -55,6 +80,7 @@ export class UserRegistrationComponent {
 
   onTesting(){
     console.log(this.personalInformation.value);
+    console.log(this.EducationalQualification.value);
     
   }
 }

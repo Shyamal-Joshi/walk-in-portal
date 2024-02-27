@@ -45,31 +45,23 @@ export class LoginComponent {
 
     this.UserService.login(email!, password!).subscribe(
       (result) => {
-        // Check if result is successful
+        
         if (result ) {
           console.log(result);
           localStorage.setItem("token", result.token);
           
-          // Navigate only after successful login
           this.router.navigateByUrl('/jobs');
   
-          // Display success message
-          // this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Login Successful' });
+        
           this.toastr.success('Login Successful');
         } else {
-          // Handle other cases, e.g., invalid credentials
-          // You can display error message or handle it as per your application's requirement
+          
           console.log("Login failed:", result);
-          // Display error message
-          // this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Login Failed' });
           this.toastr.error('Login Failed');
         }
       },
       (error) => {
-        // Handle error scenario
         console.error("Error occurred:", error);
-        // Display error message
-        // this.messageService.add({ severity: 'error', summary: 'Error', detail: 'An error occurred while logging in' });
         this.toastr.error('An error occurred while logging in');
       }
     );

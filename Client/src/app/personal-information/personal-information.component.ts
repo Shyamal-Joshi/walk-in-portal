@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserDataService } from '../services/user-data.service';
 
 @Component({
   selector: 'app-personal-information',
@@ -8,6 +9,7 @@ import { FormArray, FormControl, FormGroup, FormGroupDirective, FormsModule, Rea
   imports: [ReactiveFormsModule,CommonModule,FormsModule],
   templateUrl: './personal-information.component.html',
   styleUrl: './personal-information.component.scss',
+  providers:[UserDataService]
 })
 export class PersonalInformationComponent implements OnInit {
   @Input() parentComponent!: any;
@@ -15,11 +17,18 @@ export class PersonalInformationComponent implements OnInit {
   
   personalInfoForm:FormGroup;
 
-  constructor(private rootFormGroup: FormGroupDirective) {
+  RoleNames : string[] =[];
+
+  constructor(private rootFormGroup: FormGroupDirective,private userService:UserDataService) {
     this.personalInfoForm = {} as FormGroup;
   }
   ngOnInit(): void {
     this.personalInfoForm = this.rootFormGroup.control;
+
+    this.userService.getJobRoleNames()
+    .subscribe((data:string[])=>{
+      this.RoleNames=data;
+    });
   }
 
   onSubmit(){

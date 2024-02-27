@@ -18,16 +18,7 @@ namespace walk_in_portal_Backend.Controller
             _appDbContext = appDbContext;
         }
         
-        
-        
-        // [HttpGet("getAllDrives")]
-        // [ProducesResponseType(StatusCodes.Status200OK)]
-        // public async Task<IActionResult> GetAllDrives()
-        // {
-        //     var result = await _appDbContext.TblWalkInApplications.ToListAsync();
-        //     return Ok(result);
-        // }
-
+        //api for job listing page
         [HttpGet("getAllDrives")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetApplication()
@@ -78,6 +69,7 @@ namespace walk_in_portal_Backend.Controller
             return Ok(final);
         }
 
+        //api for job details page
         [HttpGet("getDrive/{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [Authorize]
@@ -108,6 +100,11 @@ namespace walk_in_portal_Backend.Controller
                 .GroupBy(c => c.application_id)
                 .ToListAsync();
 
+            if (applications == null)
+            {
+                return NotFound();
+            }
+            
             var timeSlot = await _appDbContext.TblWalkInApplicationTimeSlots
                 .Where(c => c.WalkInApplicationId ==  id)
                 .Select(c => new
@@ -173,6 +170,8 @@ namespace walk_in_portal_Backend.Controller
             
             return Ok(updatedApplication);
         }
+        
+        
     }
 }
 

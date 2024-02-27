@@ -51,19 +51,15 @@
                 formControlName="portfolioUrl">
             </div>
             <div class="job_roles">
-                <label for="">Preferred Job Roles*</label>
+                <label>Preferred Job Roles*</label>
                 <div class="input_jobRoles">
-                    <div>
-                        <input type="checkbox" (change)="onChange($event)" value="InstructionalDesigner" id="InstructionalDesigner" /> Instructional Designer
-                    </div>
-                    <div>
-                        <input type="checkbox" (change)="onChange($event)" value="SoftwareEngineer" id="SoftwareEngineer" /> 
-                        Software Engineer
-                    </div>
-                    <div>
-                        <input type="checkbox" (change)="onChange($event)" value="SoftwareQualityEngineer" id="SoftwareQualityEngineer" /> Software Quality Engineer
-                    </div>
+                    @for(role of RoleNames;track $index){
+                        <div>
+                            <input type="checkbox" (change)="onChange($event)" [value]="role" [id]="role" /> {{role}}
+                        </div>
+                    }
                 </div>
+                
             </div>
             <div class="referral_name">
                 <label for="input_referral" class="referralName">If You Are Registering Via A Referral, Please Mention Full Name Of The Employee Who Referred You</label>
@@ -86,5 +82,5 @@
 </div>
 
 <div class="next__and__previous__btns">
-    <button (click)="onSubmit()" (click)="this.parentComponent.moveToNextStep()">Next</button>
+    <button type="submit" (click)="onSubmit()" (click)="this.parentComponent.moveToNextStep()">Next</button>
 </div>
