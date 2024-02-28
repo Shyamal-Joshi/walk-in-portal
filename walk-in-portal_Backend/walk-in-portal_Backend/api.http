@@ -1,0 +1,11 @@
+﻿POST http://localhost:5107/api/v1/applyJob
+content-type: application/json;
+{
+  "jobId": 0,
+  "jobRoles": [
+    "string"
+  ],
+  "timeSlot": "9:00:00 - 13:00:00",
+  "userId": 0,
+  "userResume": "string"
+}
