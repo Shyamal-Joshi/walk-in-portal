@@ -40,3 +40,48 @@ export interface ITimeSlot{
         }
     ]
 }
+
+export interface IPersonalInformation{
+    firstName:string,
+    lastName:string,
+    email:string,
+    phoneNumber:string,
+    resumePath:string,
+    portfolioUrl:string,
+    profilePhotoUrl:string,
+    preferredJobRoles:string[],
+    referralName:string,
+    newsletter:boolean,
+}
+
+export interface IEducationalQualification{
+    aggregatedPercentage:string,
+    yearOfPassing:string,
+    qualification:string,
+    stream:string,
+    college:string,
+    otherCollege:string,
+    collegeLocation:string,
+}
+
+export interface IProfessionalQualification{
+    applicationType: string,
+    familiarTechnologies: string[],
+    otherFamiliarTechnologies: string,
+    previouslyApplied: boolean,
+    previouslyAppliedRole: string,
+    yearsOfExperience: number,
+    currentCtc: number,
+    expectedCtc: number
+    expertiseTechnology: string[],
+    otherExpertiseTechnology: string,
+    noticePeriod: boolean
+    noticePeriodDuration: number,
+    noticePeriodDate: Date,
+}
+
+export interface IUserRegistration{
+    personalInfo:IPersonalInformation,
+    eduQualification:IEducationalQualification,
+    profQualification:IProfessionalQualification
+}

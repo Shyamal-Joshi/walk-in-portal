@@ -206,7 +206,6 @@ namespace walk_in_portal_Backend.Controller
                     var jobId = await _appDbContext.TblJobRoles.Where(c => c.JobName == role).Select(c => c.Id)
                         .FirstAsync();
                     role_id.Add(jobId);
-                    Console.WriteLine(role + " : " + jobId);
                 }
 
                 var user_applied_job = new TblUserAppliedJob

@@ -52,13 +52,13 @@ export class UserRegistrationComponent {
     otherFamiliarTechnologies: new FormControl(''),
     previouslyApplied: new FormControl(false),
     previouslyAppliedRole: new FormControl(''),
-    yearsOfExperience: new FormControl('', [Validators.required]),
+    yearsOfExperience: new FormControl(0, [Validators.required]),
     currentCtc: new FormControl('', [Validators.required]),
     expectedCtc: new FormControl('', [Validators.required]),
     expertiseTechnology: new FormArray([]),
     otherExpertiseTechnology: new FormControl(''),
     noticePeriod: new FormControl(false),
-    noticePeriodDuration: new FormControl(''),
+    noticePeriodDuration: new FormControl(0),
     noticePeriodDate: new FormControl(''),
   });
 
