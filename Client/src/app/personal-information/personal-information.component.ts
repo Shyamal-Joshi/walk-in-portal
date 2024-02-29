@@ -2,14 +2,17 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserDataService } from '../services/user-data.service';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { AnimateModule } from 'primeng/animate';
 
 @Component({
   selector: 'app-personal-information',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule,FormsModule],
+  imports: [ReactiveFormsModule,CommonModule,FormsModule,ToastModule ],
   templateUrl: './personal-information.component.html',
   styleUrl: './personal-information.component.scss',
-  providers:[UserDataService]
+  providers:[UserDataService,MessageService]
 })
 export class PersonalInformationComponent implements OnInit {
   @Input() parentComponent!: any;
@@ -19,7 +22,7 @@ export class PersonalInformationComponent implements OnInit {
 
   RoleNames : string[] =[];
 
-  constructor(private rootFormGroup: FormGroupDirective,private userService:UserDataService) {
+  constructor(private rootFormGroup: FormGroupDirective,private userService:UserDataService,private messageService:MessageService) {
     this.personalInfoForm = {} as FormGroup;
   }
   ngOnInit(): void {
@@ -54,5 +57,23 @@ export class PersonalInformationComponent implements OnInit {
       })
     }
   }
- 
+
+  onCheck(){
+    this.parentComponent.moveToNextStep() 
+    // if(this.personalInfoForm.valid){
+    //   this.parentComponent.moveToNextStep()      
+    // }
+    // else{
+    //   console.log(this.personalInfoForm.getError('firstName'));
+    //   Object.keys(this.personalInfoForm.controls).forEach(key => {
+    //     const controlErrors: any = this.personalInfoForm.get(key)?.errors;
+    //     if (controlErrors != null) {
+    //       Object.keys(controlErrors).forEach(keyError => {
+    //         this.messageService.add({ severity: 'error', summary: 'Error', detail: key + ', Error: ' + keyError,sticky: true});
+    //       });
+    //     }
+    //   });
+    // }
+  }
+  
 }

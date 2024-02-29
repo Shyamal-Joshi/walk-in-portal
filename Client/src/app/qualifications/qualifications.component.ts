@@ -4,14 +4,17 @@ import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule } f
 
 import { MatIconModule } from '@angular/material/icon';
 import { UserDataService } from '../services/user-data.service';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { AnimateModule } from 'primeng/animate';
 
 @Component({
   selector: 'app-qualifications',
   standalone: true,
-  imports: [MatIconModule,CommonModule,FormsModule,ReactiveFormsModule],
+  imports: [MatIconModule,CommonModule,FormsModule,ReactiveFormsModule,ToastModule],
   templateUrl: './qualifications.component.html',
   styleUrl: './qualifications.component.scss',
-  providers:[UserDataService]
+  providers:[UserDataService,MessageService]
 })
 export class QualificationsComponent implements OnInit {
   isEducationalQualificationVisible:boolean = false;
@@ -29,7 +32,7 @@ export class QualificationsComponent implements OnInit {
   @Input() ProfessionalQualificationForm!:FormGroup;
 
 
-  constructor(private userService:UserDataService){
+  constructor(private userService:UserDataService,private messageService:MessageService){
     
   }
   ngOnInit(): void {
@@ -78,6 +81,35 @@ export class QualificationsComponent implements OnInit {
           tempArray.removeAt(i);
         }
       })
+    }
+  }
+
+
+  onCheck(){
+    // this.parentComponent.moveToNextStep() 
+    if(this.EducationQualificationForm.valid && this.ProfessionalQualificationForm.valid){
+      this.parentComponent.moveToNextStep()      
+    }
+    else{
+      Object.keys(this.EducationQualificationForm.controls).forEach(key => {
+        ;
+        
+        const controlErrors: any = this.EducationQualificationForm.get(key)?.errors;
+        if (controlErrors != null) {
+          Object.keys(controlErrors).forEach(keyError => {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: key + ', Error: ' + keyError,sticky: true});
+          });
+        }
+      });
+      Object.keys(this.ProfessionalQualificationForm.controls).forEach(key => {
+        console.log(key)
+        const controlErrors: any = this.ProfessionalQualificationForm.get(key)?.errors;
+        if (controlErrors != null) {
+          Object.keys(controlErrors).forEach(keyError => {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: key + ', Error: ' + keyError,sticky: true});
+          });
+        }
+      });
     }
   }
 }
