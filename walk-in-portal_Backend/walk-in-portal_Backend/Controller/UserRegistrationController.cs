@@ -18,25 +18,26 @@ public class UserRegistrationController : ControllerBase
     }
     
     //api for registering new user into database
-    [HttpPost("/register")]
+    [HttpPost("register")]
     public async Task<IActionResult> RegisterUserAsync([FromBody] UserRegistration user)
     {   
         //college
         //technology
+        Console.WriteLine(user);
         if(user== null) return BadRequest();
         
         var userPersonalInfo = new TblUserInformation()
         {
-            EmailId = user.PersonalInfo.Email,
+            EmailId = user.PersonalInfo.email,
             Password = "demo@123",
-            FirstName = user.PersonalInfo.FirstName,
-            LastName = user.PersonalInfo.LastName,
-            PhoneNumber = user.PersonalInfo.PhoneNumber,
-            ProfilePhoto = user.PersonalInfo.ProfilePhotoUrl,
-            Resume = user.PersonalInfo.ResumePath,
-            Referrer = user.PersonalInfo.ReferralName,
-            NewsLetter = Convert.ToSByte(user.PersonalInfo.Newsletter),
-            PortfolioUrl = user.PersonalInfo.PortfolioUrl,
+            FirstName = user.PersonalInfo.firstName,
+            LastName = user.PersonalInfo.lastName,
+            PhoneNumber = user.PersonalInfo.phoneNumber,
+            ProfilePhoto = user.PersonalInfo.profilePhotoUrl,
+            Resume = user.PersonalInfo.resumePath,
+            Referrer = user.PersonalInfo.referralName,
+            NewsLetter = Convert.ToSByte(user.PersonalInfo.newsletter),
+            PortfolioUrl = user.PersonalInfo.portfolioUrl,
             UserRole = "fresher"
         };
 
@@ -45,7 +46,7 @@ public class UserRegistrationController : ControllerBase
         
         List<int> role_id = new List<int>();
 
-        foreach (var role in user.PersonalInfo.PreferredJobRoles)
+        foreach (var role in user.PersonalInfo.preferredJobRoles)
         {
             var jobId = await _appDbContext.TblJobRoles.Where(c => c.JobName == role).Select(c => c.Id)
                 .FirstAsync();
@@ -66,7 +67,7 @@ public class UserRegistrationController : ControllerBase
             await _appDbContext.SaveChangesAsync();
         }
 
-        var collegeName = user.EduQualification.College;
+        var collegeName = user.EduQualification.college;
         
         var collegeId = await _appDbContext.TblQualificationsColleges.Where(c => c.Name == collegeName).Select(c => c.Id)
          .FirstOrDefaultAsync();
@@ -75,8 +76,8 @@ public class UserRegistrationController : ControllerBase
         {
             var newCollege = new TblQualificationsCollege()
             {
-                Name = user.EduQualification.OtherCollege,
-                Location = user.EduQualification.CollegeLocation
+                Name = user.EduQualification.otherCollege,
+                Location = user.EduQualification.collegeLocation
             };
 
             await _appDbContext.TblQualificationsColleges.AddAsync(newCollege);
@@ -88,24 +89,24 @@ public class UserRegistrationController : ControllerBase
         var educationalQualification = new TblEducationQualification()
         {
             UserId = userid,
-            AggregatedPercentage = Convert.ToInt32(user.EduQualification.AggregatedPercentage),
-            YearOfPassing = Convert.ToInt32(user.EduQualification.YearOfPassing),
-            QualificationId = await _appDbContext.TblQualifications.Where(c =>  c.Name ==  user.EduQualification.Qualification).Select(c =>  c.Id).FirstAsync(),
-            StreamId =  await _appDbContext.TblStreams.Where(c =>  c.Name ==  user.EduQualification.Stream).Select(c =>  c.Id).FirstAsync(),
+            AggregatedPercentage = Convert.ToInt32(user.EduQualification.aggregatedPercentage),
+            YearOfPassing = Convert.ToInt32(user.EduQualification.yearOfPassing),
+            QualificationId = await _appDbContext.TblQualifications.Where(c =>  c.Name ==  user.EduQualification.qualification).Select(c =>  c.Id).FirstAsync(),
+            StreamId =  await _appDbContext.TblStreams.Where(c =>  c.Name ==  user.EduQualification.stream).Select(c =>  c.Id).FirstAsync(),
             CollegeId = collegeId,
-            Experience = user.ProfQualification.ApplicationType,
+            Experience = user.ProfQualification.applicationType,
         };
         
         await _appDbContext.TblEducationQualifications.AddAsync(educationalQualification);
         await _appDbContext.SaveChangesAsync();
 
-        if (user.ProfQualification.ApplicationType == "fresher")
+        if (user.ProfQualification.applicationType == "fresher")
         {
             var fresherQualification = new TblProfessionalQualificationFresher()
             {
                 UserId = userid,
-                AttemptedZeusTest = Convert.ToSByte(user.ProfQualification.PreviouslyApplied),
-                RoleAttemptedZeusTest = user.ProfQualification.PreviouslyAppliedRole,
+                AttemptedZeusTest = Convert.ToSByte(user.ProfQualification.previouslyApplied),
+                RoleAttemptedZeusTest = user.ProfQualification.previouslyAppliedRole,
             };
             
             await _appDbContext.TblProfessionalQualificationFreshers.AddAsync(fresherQualification);
@@ -113,7 +114,7 @@ public class UserRegistrationController : ControllerBase
             
             List<int> tech_id = new List<int>();
 
-            foreach (var tech in user.ProfQualification.FamiliarTechnologies)
+            foreach (var tech in user.ProfQualification.familiarTechnologies)
             {
                 var techId = await _appDbContext.TblTechnologies.Where(c => c.Name == tech).Select(c => c.Id)
                     .FirstAsync();
@@ -131,20 +132,22 @@ public class UserRegistrationController : ControllerBase
                 await _appDbContext.TblFresherTechnologies.AddAsync(TechnologyName);
                 await _appDbContext.SaveChangesAsync();
             }
+            return Ok("User Added");
         }
         else
         {
+            
             var professionalQualification = new TblProfessionalQualificationExperienced()
             {
                 UserId = userid,
-                AttemptedZeusTest = Convert.ToSByte(user.ProfQualification.PreviouslyApplied),
-                RoleAttemptedZeusTest = user.ProfQualification.PreviouslyAppliedRole,
-                YearsOfExperience = user.ProfQualification.YearsOfExperience,
-                CurrentCtc = Convert.ToDouble(user.ProfQualification.CurrentCtc) ,
-                ExpectedCtc = Convert.ToDouble(user.ProfQualification.ExpectedCtc),
-                NoticePeriod = Convert.ToSByte(user.ProfQualification.NoticePeriod),
-                EndDateNoticePeriod = user.ProfQualification.NoticePeriodDate,
-                NoticePeriodLength = user.ProfQualification.NoticePeriodDuration,
+                AttemptedZeusTest = Convert.ToSByte(user.ProfQualification.previouslyApplied),
+                RoleAttemptedZeusTest = user.ProfQualification.previouslyAppliedRole,
+                YearsOfExperience = user.ProfQualification.yearsOfExperience,
+                CurrentCtc = Convert.ToDouble(user.ProfQualification.currentCtc) ,
+                ExpectedCtc = Convert.ToDouble(user.ProfQualification.expectedCtc),
+                NoticePeriod = Convert.ToSByte(user.ProfQualification.noticePeriod),
+                EndDateNoticePeriod = user.ProfQualification.noticePeriodDate,
+                NoticePeriodLength = user.ProfQualification.noticePeriodDuration,
             };
             
             await _appDbContext.TblProfessionalQualificationExperienceds.AddAsync(professionalQualification);
@@ -152,7 +155,7 @@ public class UserRegistrationController : ControllerBase
             
             List<int> fami_tech_id = new List<int>();
 
-            foreach (var tech in user.ProfQualification.FamiliarTechnologies)
+            foreach (var tech in user.ProfQualification.familiarTechnologies)
             {
                 var techId = await _appDbContext.TblTechnologies.Where(c => c.Name == tech).Select(c => c.Id)
                     .FirstAsync();
@@ -173,7 +176,7 @@ public class UserRegistrationController : ControllerBase
             
             List<int> exp_tech_id = new List<int>();
 
-            foreach (var tech in user.ProfQualification.ExpertiseTechnology)
+            foreach (var tech in user.ProfQualification.expertiseTechnology)
             {
                 var techId = await _appDbContext.TblTechnologies.Where(c => c.Name == tech).Select(c => c.Id)
                     .FirstAsync();
@@ -191,6 +194,7 @@ public class UserRegistrationController : ControllerBase
                 await _appDbContext.TblExperienceExpertiseTechnologies.AddAsync(TechnologyName);
                 await _appDbContext.SaveChangesAsync();
             }
+            return Ok("User Added");
         }
         
         return Ok("User Added");

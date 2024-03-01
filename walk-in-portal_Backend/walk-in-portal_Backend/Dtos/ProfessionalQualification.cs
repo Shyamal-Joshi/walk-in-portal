@@ -2,17 +2,17 @@
 
 public class ProfessionalQualification
 {
-    public string ApplicationType { get; set; }
-    public List<string> FamiliarTechnologies { get; set; }
-    public string OtherFamiliarTechnologies { get; set; }
-    public bool PreviouslyApplied { get; set; }
-    public string PreviouslyAppliedRole { get; set; }
-    public int YearsOfExperience { get; set; }
-    public decimal CurrentCtc { get; set; }
-    public decimal ExpectedCtc { get; set; }
-    public List<string> ExpertiseTechnology { get; set; }
-    public string OtherExpertiseTechnology { get; set; }
-    public bool NoticePeriod { get; set; }
-    public int NoticePeriodDuration { get; set; }
-    public DateTime NoticePeriodDate { get; set; }
+    public string applicationType { get; set; }
+    public List<string> familiarTechnologies { get; set; }
+    public string otherFamiliarTechnologies { get; set; }
+    public bool previouslyApplied { get; set; }
+    public string previouslyAppliedRole { get; set; }
+    public int yearsOfExperience { get; set; }
+    public decimal currentCtc { get; set; }
+    public decimal expectedCtc { get; set; }
+    public List<string> expertiseTechnology { get; set; }
+    public string otherExpertiseTechnology { get; set; }
+    public bool noticePeriod { get; set; }
+    public int noticePeriodDuration { get; set; }
+    public DateTime noticePeriodDate { get; set; }
 }

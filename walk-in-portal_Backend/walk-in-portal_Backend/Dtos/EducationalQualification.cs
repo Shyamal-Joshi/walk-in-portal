@@ -2,11 +2,11 @@
 
 public class EducationalQualification
 {
-    public string AggregatedPercentage { get; set; }
-    public string YearOfPassing { get; set; }
-    public string Qualification { get; set; }
-    public string Stream { get; set; }
-    public string College { get; set; }
-    public string OtherCollege { get; set; }
-    public string CollegeLocation { get; set; }
+    public string aggregatedPercentage { get; set; }
+    public string yearOfPassing { get; set; }
+    public string qualification { get; set; }
+    public string stream { get; set; }
+    public string college { get; set; }
+    public string otherCollege { get; set; }
+    public string collegeLocation { get; set; }
 }

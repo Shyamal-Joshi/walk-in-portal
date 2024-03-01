@@ -5,6 +5,9 @@ import { PersonalInformationComponent } from '../personal-information/personal-i
 import { QualificationsComponent } from '../qualifications/qualifications.component';
 import { PreviewProfileComponent } from '../preview-profile/preview-profile.component';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule,Validators  } from '@angular/forms';
+import { IUserRegistration } from '../interface';
+import { UserDataService } from '../services/user-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-registration',
@@ -23,7 +26,12 @@ import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule,Val
 export class UserRegistrationComponent {
   isDisable: boolean = true;
   currentStep: number = 1;
-
+  registerBody:any={
+    personalInfo : {},
+    eduQualification :{},
+    profQualification : {}
+  }
+  constructor(private UserService:UserDataService,private router:Router){}
   personalInformation=new FormGroup({
     firstName:new FormControl('',[Validators.required]),
     lastName:new FormControl('',[Validators.required]),
@@ -31,6 +39,7 @@ export class UserRegistrationComponent {
     phoneNumber:new FormControl('',[Validators.required,Validators.minLength(10)]),
     resumePath:new FormControl('',[Validators.required]),
     portfolioUrl:new FormControl(''),
+    profilePhotoUrl:new FormControl(''),
     preferredJobRoles:new FormArray([],[Validators.required]),
     referralName:new FormControl(''),
     newsletter:new FormControl(false),
@@ -44,7 +53,7 @@ export class UserRegistrationComponent {
     college:new FormControl('',[Validators.required]),
     otherCollege:new FormControl(''),
     collegeLocation:new FormControl('',[Validators.required]),
-  })
+  });
 
   // professionalQualification = new FormGroup({
   //   applicationType: new FormControl('fresher', [Validators.required]),
@@ -61,6 +70,7 @@ export class UserRegistrationComponent {
   //   noticePeriodDuration: new FormControl(0),
   //   noticePeriodDate: new FormControl(''),
   // });
+
   professionalQualification = new FormGroup({
     applicationType: new FormControl('fresher', [Validators.required]),
     familiarTechnologies: new FormArray([]),
@@ -68,20 +78,42 @@ export class UserRegistrationComponent {
     previouslyApplied: new FormControl(false),
     previouslyAppliedRole: new FormControl(''),
     yearsOfExperience: new FormControl(0),
-    currentCtc: new FormControl(''),
-    expectedCtc: new FormControl(''),
+    currentCtc: new FormControl(0),
+    expectedCtc: new FormControl(0),
     expertiseTechnology: new FormArray([]),
     otherExpertiseTechnology: new FormControl(''),
     noticePeriod: new FormControl(false),
     noticePeriodDuration: new FormControl(0),
-    noticePeriodDate: new FormControl(''),
+    noticePeriodDate: new FormControl(new Date()),
   });
+
+  
+
+  onCreate(){
+    this.registerBody = {
+      personalInfo : this.personalInformation.value,
+      eduQualification : this.EducationalQualification.value,
+      profQualification : this.professionalQualification.value
+    }
+    console.log(this.registerBody);
+    // console.log(this.personalInformation.value);
+    // console.log(this.EducationalQualification.value);
+    // console.log(this.professionalQualification.value);
+    
+    this.UserService.register(this.registerBody).subscribe({
+      next: response => {
+        console.log('Response:', response);
+      },
+      error: error => {
+        console.error('Error:', error);
+      }
+    });
+    
+  }
 
   moveToNextStep():void {
     this.currentStep++;
     if (this.currentStep === 3) this.isDisable = false;
-    
-    
   }
 
   moveToPreviousStep() {

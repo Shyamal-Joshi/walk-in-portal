@@ -13,20 +13,20 @@
         <form class="personal__info__form" action="">
             <div class="first_name">
                 <label for="firstName">First Name</label>
-                <span>Shyamal Joshi</span>
+                <span>{{this.parentComponent.personalInformation.get('firstName').value}}</span>
             </div>
             <div class="last_name">
                 <label for="LastName">Last Name</label>
-                <span>Shyamal Joshi</span>
+                <span>{{this.parentComponent.personalInformation.get('lastName').value}}</span>
 
             </div>
             <div class="email">
                 <label for="Email">Email</label>
-                <span>Shyamal Joshi</span>
+                <span>{{this.parentComponent.personalInformation.get('email').value}}</span>
             </div>
             <div class="phone_no">
                 <label for="phone_no">Phone Number</label>
-                <span>Shyamal Joshi</span>
+                <span>{{this.parentComponent.personalInformation.get('phoneNumber').value}}</span>
             </div>
             <div class="resume">
                 <label for="input_resume">
@@ -36,19 +36,33 @@
             </div>
             <div class="portfolio_link">
                 <label for="portfolio_link">Enter Portfolio URL (if any)</label>
-                <span>Shyamal Joshi</span>
+                @if (this.parentComponent.personalInformation.get('portfolioUrl').value == null) {
+                    <span> - </span>
+                }
+                @else {
+                    <span>{{this.parentComponent.personalInformation.get('portfolioUrl').value}}</span>
+                }
             </div>
             <div class="job_roles">
                 <label for="">Preferred Job Roles</label>
-                <span>Shyamal Joshi</span>
+                @for(roles of this.parentComponent.personalInformation.get('preferredJobRoles').value; track $index){
+                    <span>{{roles}}</span>
+                }
+                
             </div>
             <div class="referral_name">
                 <label for="input_referral" class="referralName">If You Are Registering Via A Referral, Please Mention Full Name Of The Employee Who Referred You</label>
-                <span>Shyamal Joshi</span>
+                
+                @if (this.parentComponent.personalInformation.get('referralName').value == null) {
+                    <span> - </span>
+                }
+                @else{
+                    <span>{{this.parentComponent.personalInformation.get('referralName').value}}</span>
+                }
             </div>
             <div class="newsletter">
                 <div>
-                    <input type="checkbox" name="input_newsletter" id="input_newsletter" /> Send me job related updates via mail
+                    <input type="checkbox" name="input_newsletter" id="input_newsletter" [defaultChecked]="this.parentComponent.personalInformation.get('newsletter').value" disabled/> Send me job related updates via mail
                 </div>
             </div>
         </form>
@@ -74,35 +88,40 @@
         <form action="" class="educational__qualification__form">
             <div class="aggregate_percentage">
                 <label for="AggregatePercentage">Aggregate Percentage</label>
-                <span>Shyamal Joshi</span>
+                <span>{{this.parentComponent.EducationalQualification.get('aggregatedPercentage').value}}</span>
             </div>
             <div class="year_of_passing">
                 <label for="YearOfPassing">Year of Passing</label>
-                <span>Shyamal Joshi</span>
+                <span>{{this.parentComponent.EducationalQualification.get('yearOfPassing').value}}</span>
             </div>
             <div class="qualification_and_stream">
                 <div class="Qualification">
                     <label for="qualification">Qualification</label>
-                    <span>Shyamal Joshi</span>
+                    <span>{{this.parentComponent.EducationalQualification.get('qualification').value}}</span>
                 </div>
                 <div class="Stream">
                     <label for="stream">Stream</label>
-                    <span>Shyamal Joshi</span>
+                    <span>{{this.parentComponent.EducationalQualification.get('stream').value}}</span>
                 </div>
             </div>
             <div class="college_and_other_name">
                 <div class="college_name">
                     <label for="CollegeName">College</label>
-                    <span>Shyamal Joshi</span>
+                    <span>{{this.parentComponent.EducationalQualification.get('college').value}}</span>
                 </div>
                 <div class="Other_college">
                     <label for="OtherCollege">If others, please enter your college name</label>
-                    <span>Shyamal Joshi</span>
+                    @if (this.parentComponent.EducationalQualification.get('otherCollege').value == "") {
+                        <span> - </span>
+                    }
+                    @else{
+                        <span>{{this.parentComponent.EducationalQualification.get('otherCollege').value}}</span>
+                    }
                 </div>
             </div>
             <div class="college_location">
                 <label for="CollegeLocation">Where is your college located?</label>
-                <span>Shyamal Joshi</span>
+                <span>{{this.parentComponent.EducationalQualification.get('collegeLocation').value}}</span>
             </div>
         </form>
     </div>
@@ -112,62 +131,101 @@
     </div>
     <div class="professional__information_subheader">
         <label for="">Application Type</label>
-        <span>Experienced</span>
+        <span>{{this.parentComponent.professionalQualification.get('applicationType').value}}</span>
     </div>
     <div class="professional__information__container">
-        <div class="years__of__exeperience">
-            <label for="yearsOfExeperience">Years of Experience</label>
-            <span>5</span>
-        </div>
-        <div class="current__ctc">
-            <label for="currentCtc">Current CTC (In Rupees)</label>
-            <span>6,50,000</span>
-        </div>
-        <div class="expected__ctc">
-            <label for="expectedCtc">Expected CTC (In Rupees)</label>
-            <span>7,50,000</span>
-        </div>
-        <div class="exeperties__technologies">
-            <label for="">Select All The Technologies You Expertise In</label>
-            <div class="input_exeperties__technologies">
-                <span>JavaScript</span>
-                <span>NodeJs</span>
+        
+        @if(this.parentComponent.professionalQualification.get('applicationType').value === 'experienced'){
+            <div class="years__of__exeperience">
+                <label for="yearsOfExeperience">Years of Experience</label>
+                <span>{{this.parentComponent.professionalQualification.get('yearsOfExperience').value}}</span>
             </div>
-            <label for="" >If others, please mention</label>
-            <span>-</span>
-        </div>
+            <div class="current__ctc">
+                <label for="currentCtc">Current CTC (In Rupees)</label>
+                <span>{{this.parentComponent.professionalQualification.get('currentCtc').value}}</span>
+            </div>
+            <div class="expected__ctc">
+                <label for="expectedCtc">Expected CTC (In Rupees)</label>
+                <span>{{this.parentComponent.professionalQualification.get('expectedCtc').value}}</span>
+            </div>
+            <div class="exeperties__technologies">
+                <label for="">Select All The Technologies You Expertise In</label>
+                <div class="input_exeperties__technologies">
+                    @for(tech of this.parentComponent.professionalQualification.get('expertiseTechnology').value;track $index){
+                        <span>{{tech}}</span>
+                    }
+                </div>
+                <label >If others, please mention</label>
+                @if (this.parentComponent.professionalQualification.get('otherExpertiseTechnology').value == "") {
+                    <span> - </span>
+                }
+                @else{
+                    <span>{{this.parentComponent.professionalQualification.get('otherExpertiseTechnology').value}}</span>
+                }
+                
+            </div>
+        }
+        
         <div class="familiar__technologies">
             <label for="">Select All The Technologies You Are Familiar In</label>
             <div class="input_familiar__technologies">
-                <span>JavaScript</span>
-                <span>NodeJs</span>
+                @for(tech of this.parentComponent.professionalQualification.get('familiarTechnologies').value;track $index){
+                    <span>{{tech}}</span>
+                }
             </div>
             <label for="" >If others, please mention</label>
-            <span>-</span>
+            @if (this.parentComponent.professionalQualification.get('otherFamiliarTechnologies').value == "") {
+                <span> - </span>
+            }
+            @else{
+                <span>{{this.parentComponent.professionalQualification.get('otherFamiliarTechnologies').value}}</span>
+            }
+            
         </div>
-        <div class="notice__period">
-            <label for="stream">Are you currently on notice period?</label>
-            <div class="notice__period__text">
-                <span>Yes</span>
-            </div>
-            <div class="notice__period__info">
-                <div class="notice__period__end__date">
-                    <label for="" >If Yes, when will your notice period end?</label>
-                    <span>20-May-2020</span>
+        @if (this.parentComponent.professionalQualification.get('applicationType').value === 'experienced') {
+            <div class="notice__period">
+                <label for="stream">Are you currently on notice period?</label>
+                <div class="notice__period__text">
+                    @if (this.parentComponent.professionalQualification.get('noticePeriod').value) {
+                        <span>Yes</span>
+                    }
+                    @else {
+                        <span>No</span>
+                    }
                 </div>
-                <div class="notice__period__duration">
-                    <label for="" >How long is your notice period? (Mention in months)</label>
-                    <span>2 Months</span>
-                </div>
+                @if(!this.parentComponent.professionalQualification.get('noticePeriod').value){
+                    <div class="notice__period__info">
+                        <div class="notice__period__end__date">
+                            <label for="" >If Yes, when will your notice period end?</label>
+                            <span>{{this.parentComponent.professionalQualification.get('noticePeriodDate').value}}</span>
+                        </div>
+                        <div class="notice__period__duration">
+                            <label for="" >How long is your notice period? (Mention in months)</label>
+                            <span>{{this.parentComponent.professionalQualification.get('noticePeriodDuration').value}} months</span>
+                        </div>
+                    </div>
+                }
             </div>
-        </div>
+        }
+        
         <div class="previously__applied">
             <label for="stream">Have You Appeared For Any Test By Zeus in the past 12 months?</label>
             <div class="previously__applied__radio">
-                <span>No</span>
+                @if (this.parentComponent.professionalQualification.get('previouslyApplied').value) {
+                    <span>Yes</span>
+                }
+                @else {
+                    <span>No</span>
+                }
             </div>
             <label for="" >If Yes, which role did you apply for?</label>
-            <span>-</span>
+            @if (this.parentComponent.professionalQualification.get('previouslyAppliedRole').value == "") {
+                <span> - </span>
+            }
+            @else{
+                <span>{{this.parentComponent.professionalQualification.get('previouslyAppliedRole').value}}</span>
+            }
+            
         </div>
     </div>
 </div>

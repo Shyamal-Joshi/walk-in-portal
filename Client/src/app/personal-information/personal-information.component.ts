@@ -59,21 +59,21 @@ export class PersonalInformationComponent implements OnInit {
   }
 
   onCheck(){
-    this.parentComponent.moveToNextStep() 
-    // if(this.personalInfoForm.valid){
-    //   this.parentComponent.moveToNextStep()      
-    // }
-    // else{
-    //   console.log(this.personalInfoForm.getError('firstName'));
-    //   Object.keys(this.personalInfoForm.controls).forEach(key => {
-    //     const controlErrors: any = this.personalInfoForm.get(key)?.errors;
-    //     if (controlErrors != null) {
-    //       Object.keys(controlErrors).forEach(keyError => {
-    //         this.messageService.add({ severity: 'error', summary: 'Error', detail: key + ', Error: ' + keyError,sticky: true});
-    //       });
-    //     }
-    //   });
-    // }
+    // this.parentComponent.moveToNextStep() 
+    if(this.personalInfoForm.valid){
+      this.parentComponent.moveToNextStep()      
+    }
+    else{
+      console.log(this.personalInfoForm.getError('firstName'));
+      Object.keys(this.personalInfoForm.controls).forEach(key => {
+        const controlErrors: any = this.personalInfoForm.get(key)?.errors;
+        if (controlErrors != null) {
+          Object.keys(controlErrors).forEach(keyError => {
+            this.messageService.add({ severity: 'error', summary: 'Error', detail: key + ', Error: ' + keyError,sticky: true});
+          });
+        }
+      });
+    }
   }
   
 }

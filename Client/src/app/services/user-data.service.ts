@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IUserRegistration } from '../interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,15 @@ export class UserDataService {
       email:email,
       password:password
     })
+  }
+
+  headers = new HttpHeaders({
+    'Content-Type': 'application/json'
+  });
+  register(registerBody:any){
+    console.log(registerBody);
+    
+    return this.http.post<{message:string}>(this._baseUrl+'v1/register',registerBody)
   }
 
   getJobRoleNames():Observable<string[]>{
