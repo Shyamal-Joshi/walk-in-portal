@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { MatIconModule } from '@angular/material/icon';
 import { UserDataService } from '../services/user-data.service';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { AnimateModule } from 'primeng/animate';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'app-qualifications',
@@ -20,6 +21,7 @@ export class QualificationsComponent implements OnInit {
   isEducationalQualificationVisible:boolean = false;
   isProfessionalQualificationVisible:boolean = false;
   
+  isOnNoticePeriod:boolean = false;
 
   //array for dropdown values
   qualificationArray:string[]=[];
@@ -33,6 +35,33 @@ export class QualificationsComponent implements OnInit {
 
 
   constructor(private userService:UserDataService,private messageService:MessageService){
+    
+    //   this.parentComponent.professionalQualification.get('applicationType')!.valueChanges.subscribe((value:string)=>{
+    //   if(value=== 'fresher'){
+    //     console.log(value);
+    //     var exp=this.parentComponent.professionalQualification.get('yearsOfExperience')!;
+    //     // console.log(exp.value);
+        
+    //     exp.setValidators(null);
+    //     this.parentComponent.professionalQualification.get('currentCtc')?.setValidators(null);
+    //     this.parentComponent.professionalQualification.get('expectedCtc')?.setValidators(null);
+    //     this.parentComponent.professionalQualification.get('expertiseTechnology')?.setValidators(null);
+    //     this.parentComponent.professionalQualification.get('noticePeriod')?.setValidators(null);
+    //     this.parentComponent.professionalQualification.updateValueAndValidity();
+
+    //   }
+    //   else{
+    //     var exp=this.parentComponent.professionalQualification.get('yearsOfExperience')!;
+    //     console.log(exp.value);
+    //     this.parentComponent.professionalQualification.get('yearsOfExperience')?.setValidators([Validators.required]);
+    //     this.parentComponent.professionalQualification.get('currentCtc')?.setValidators([Validators.required]);
+    //     this.parentComponent.professionalQualification.get('expectedCtc')?.setValidators([Validators.required]);
+    //     this.parentComponent.professionalQualification.get('expertiseTechnology')?.setValidators([Validators.required]);
+    //     this.parentComponent.professionalQualification.get('noticePeriod')?.setValidators([Validators.required]);
+    //     this.parentComponent.professionalQualification.updateValueAndValidity();
+
+    //   }
+    // })
     
   }
   ngOnInit(): void {
@@ -62,7 +91,70 @@ export class QualificationsComponent implements OnInit {
     this.parentComponent.moveToNextStep();
     // console.log(this.EducationQualificationForm.value);
     
-    console.log(this.ProfessionalQualificationForm.value);
+    // console.log(this.ProfessionalQualificationForm.value);
+  }
+
+  onApplicationTypeChange(){
+    
+    var value =this.parentComponent.professionalQualification.get('applicationType').value;
+      if(value=== 'fresher'){
+        console.log(value);
+        var exp=this.parentComponent.professionalQualification.get('yearsOfExperience')!;
+        // console.log(exp.value);
+        
+        exp.setValidators(null);
+        this.parentComponent.professionalQualification.get('currentCtc')?.clearValidators();
+        this.parentComponent.professionalQualification.get('currentCtc').updateValueAndValidity();
+        this.parentComponent.professionalQualification.get('expectedCtc')?.clearValidators();
+        this.parentComponent.professionalQualification.get('expectedCtc').updateValueAndValidity();
+        
+        this.parentComponent.professionalQualification.get('expertiseTechnology')?.clearValidators();
+        this.parentComponent.professionalQualification.get('expertiseTechnology').updateValueAndValidity();
+        
+        this.parentComponent.professionalQualification.get('noticePeriod')?.clearValidators();
+        this.parentComponent.professionalQualification.get('noticePeriod').updateValueAndValidity();
+        
+        
+
+      }
+      else{
+        var exp=this.parentComponent.professionalQualification.get('yearsOfExperience')!;
+        console.log(exp.value);
+        this.parentComponent.professionalQualification.get('yearsOfExperience')?.setValidators([Validators.required]);
+        this.parentComponent.professionalQualification.get('currentCtc')?.setValidators([Validators.required]);
+        this.parentComponent.professionalQualification.get('expectedCtc')?.setValidators([Validators.required]);
+        this.parentComponent.professionalQualification.get('expertiseTechnology')?.setValidators([Validators.required]);
+        this.parentComponent.professionalQualification.get('noticePeriod')?.setValidators([Validators.required]);
+      }
+    
+    console.log("Hello from app type");
+
+  }
+
+  onNoticePeriodChange(){
+    
+      const value = this.parentComponent.professionalQualification.get('noticePeriod')?.value;
+      console.log(value);
+      
+      if(value){
+        this.parentComponent.professionalQualification.get('noticePeriodDuration')?.setValidators([Validators.required]);
+        this.parentComponent.professionalQualification.get('noticePeriodDuration').updateValueAndValidity();
+        this.parentComponent.professionalQualification.get('noticePeriodDate')?.setValidators([Validators.required]);
+        this.parentComponent.professionalQualification.get('noticePeriodDate').updateValueAndValidity();
+        
+      }
+      else{
+        this.parentComponent.professionalQualification.get('noticePeriodDuration')?.clearValidators();
+        this.parentComponent.professionalQualification.get('noticePeriodDuration')?.updateValueAndValidity();
+        this.parentComponent.professionalQualification.get('noticePeriodDate')?.clearValidators();
+        this.parentComponent.professionalQualification.get('noticePeriodDate')?.updateValueAndValidity();
+        // this.ProfessionalQualificationForm.updateValueAndValidity();
+
+      }
+      
+    
+
+    
   }
 
   onChange(e:any,field:string){
@@ -92,7 +184,7 @@ export class QualificationsComponent implements OnInit {
     }
     else{
       Object.keys(this.EducationQualificationForm.controls).forEach(key => {
-        ;
+        
         
         const controlErrors: any = this.EducationQualificationForm.get(key)?.errors;
         if (controlErrors != null) {
@@ -102,7 +194,7 @@ export class QualificationsComponent implements OnInit {
         }
       });
       Object.keys(this.ProfessionalQualificationForm.controls).forEach(key => {
-        console.log(key)
+        // console.log(key)
         const controlErrors: any = this.ProfessionalQualificationForm.get(key)?.errors;
         if (controlErrors != null) {
           Object.keys(controlErrors).forEach(keyError => {

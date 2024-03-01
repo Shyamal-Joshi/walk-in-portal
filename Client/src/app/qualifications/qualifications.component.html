@@ -93,10 +93,10 @@
             <label for="stream">Applicant Type*</label>
             <div class="application__radio">
                 <div>
-                    <input type="radio" name="applicationType" id="fresher" value="fresher" formControlName="applicationType">Fresher
+                    <input type="radio" name="applicationType" (change)="onApplicationTypeChange()" value="fresher" formControlName="applicationType">Fresher
                 </div>
                 <div>
-                    <input type="radio" name="applicationType" id="experienced" value="experienced" formControlName="applicationType">Experienced
+                    <input type="radio" name="applicationType" (change)="onApplicationTypeChange()" value="experienced" formControlName="applicationType">Experienced
                 </div>
                 
             </div>
@@ -106,29 +106,29 @@
         @if(this.ProfessionalQualificationForm.value.applicationType==='fresher'){
             <div class="fresher__application">
                     <div class="familiar__technologies">
-                        <label for="">Select All The Technologies You Are Familiar In</label>
+                        <label >Select All The Technologies You Are Familiar In</label>
                         <div class="input_familiar__technologies">
                             @for (technology of technologiesArray; track $index) {
                                 <div>
-                                    <input type="checkbox" (change)="onChange($event,'familiarTechnologies')" [value]="technology" [id]="technology" /> {{technology}}
+                                    <input type="checkbox" (change)="onChange($event,'familiarTechnologies')" [value]="technology"  /> {{technology}}
                                 </div>
                             }
                         </div>
-                        <label for="" >If others, please mention</label>
+                        <label >If others, please mention</label>
                         <input type="text" id="other__familier__technologies">
                     </div>
                     <div class="previously__applied">
                         <label for="stream">Have You Appeared For Any Test By Zeus in the past 12 months?*</label>
                         <div class="previously__applied__radio">
                             <div>
-                                <input type="radio" name="previouslyApplied" id="Yes" [value]="true" formControlName="previouslyApplied">Yes
+                                <input type="radio" name="previouslyApplied"  [value]="true" formControlName="previouslyApplied">Yes
                             </div>
                             <div>
-                                <input type="radio" name="previouslyApplied" id="No"
+                                <input type="radio" name="previouslyApplied" 
                                 [value]="false" formControlName="previouslyApplied">No
                             </div>
                         </div>
-                        <label for="" >If Yes, which role did you apply for?</label>
+                        <label  >If Yes, which role did you apply for?</label>
                         <input type="text" id="previously__applied__role"
                         formControlName="previouslyAppliedRole">
                     </div>
@@ -149,11 +149,11 @@
                         <input type="number" id="expectedCtc" formControlName="expectedCtc">
                     </div>
                     <div class="exeperties__technologies">
-                        <label for="">Select All The Technologies You Expertise In*</label>
+                        <label >Select All The Technologies You Expertise In*</label>
                         <div class="input_exeperties__technologies">
                             @for (technology of technologiesArray; track $index) {
                                 <div>
-                                    <input type="checkbox" [value]="technology" [id]="technology" (change)="onChange($event,'expertiseTechnology')"/> {{technology}}
+                                    <input type="checkbox" [value]="technology" (change)="onChange($event,'expertiseTechnology')"/> {{technology}}
                                 </div>
                             }
                         </div>
@@ -162,54 +162,59 @@
                         formControlName="otherExpertiseTechnology">
                     </div>
                     <div class="familiar__technologies">
-                        <label for="">Select All The Technologies You Are Familiar In</label>
+                        <label >Select All The Technologies You Are Familiar In</label>
                         <div class="input_familiar__technologies">
                             @for (technology of technologiesArray; track $index) {
                                 <div>
-                                    <input type="checkbox" [value]="technology" [id]="technology" (change)="onChange($event,'familiarTechnologies')"/> {{technology}}
+                                    <input type="checkbox" [value]="technology" (change)="onChange($event,'familiarTechnologies')"/> {{technology}}
                                 </div>
                             }
                         </div>
                         <label>If others, please mention</label>
-                        <input type="text" id="other__familier__technologies"
+                        <input type="text" id="other__familier__technologies_2"
                         formControlName="otherFamiliarTechnologies">
                     </div>
                     <div class="notice__period">
                         <label for="stream">Are you currently on notice period?*</label>
                         <div class="notice__period__radio">
                             <div>
-                                <input type="radio" name="noticePeriod" id="Yes" formControlName="noticePeriod" [value]="true">Yes
+                                <input type="radio" name="noticePeriod" (change)="onNoticePeriodChange()"  formControlName="noticePeriod" [value]="true">Yes
                             </div>
                             <div>
-                                <input type="radio" name="noticePeriod" id="No" formControlName="noticePeriod" [value]="false">No
+                                <input type="radio" name="noticePeriod" (change)="onNoticePeriodChange()"  formControlName="noticePeriod" [value]="false">No
                             </div>
                         </div>
-                        <div class="notice__period__info">
-                            <div class="notice__period__end__date">
-                                <label for="" >If Yes, when will your notice period end?*</label>
-                                <input type="date" id="notice__period__end__date" formControlName="noticePeriodDate">
+                        @if (this.parentComponent.professionalQualification.get('noticePeriod')?.value) {
+                            <div class="notice__period__info"  >
+                                <div class="notice__period__end__date">
+                                    <label  >If Yes, when will your notice period end?*</label>
+                                    <input type="date" id="notice__period__end__date" formControlName="noticePeriodDate">
+                                </div>
+                                <div class="notice__period__duration">
+                                    <label >How long is your notice period?* (Mention in months)</label>
+                                    <select name="notice__period__duration" id="notice__period__duration" formControlName="noticePeriodDuration">
+                                        <option value=0>0 Months</option>
+                                        <option value=1>1 Months</option>
+                                        <option value=2>2 Months</option>
+                                        <option value=3>3 Months</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="notice__period__duration">
-                                <label for="" >How long is your notice period?* (Mention in months)</label>
-                                <select name="notice__period__duration" id="notice__period__duration" formControlName="noticePeriodDuration">
-                                    <option value="2 Months">2 months</option>
-                                    <option value="3 Months">3 months</option>
-                                </select>
-                            </div>
-                        </div>
+                        }
+                        
                     </div>
                     <div class="previously__applied">
                         <label for="stream">Have You Appeared For Any Test By Zeus in the past 12 months?*</label>
                         <div class="previously__applied__radio">
                             <div>
-                                <input type="radio" name="previouslyApplied" id="Yes" formControlName="previouslyApplied" [value]="true">Yes
+                                <input type="radio" name="previouslyApplied" formControlName="previouslyApplied" [value]="true">Yes
                             </div>
                             <div>
-                                <input type="radio" name="previouslyApplied" formControlName="previouslyApplied"id="No" [value]="false">No
+                                <input type="radio" name="previouslyApplied" formControlName="previouslyApplied" [value]="false">No
                             </div>
                         </div>
-                        <label for="" >If Yes, which role did you apply for?</label>
-                        <input type="text" id="previously__applied__role" formControlName="previouslyAppliedRole">
+                        <label  >If Yes, which role did you apply for?</label>
+                        <input type="text" id="previously__applied__role_2" formControlName="previouslyAppliedRole">
                     </div>
             </div>
         }
