@@ -83,6 +83,10 @@ input[type='checkbox']{
             cursor: pointer;
             text-transform: uppercase;
         }
+        button:disabled{
+            background-color: $disable-button-background-color;
+
+        }
         h1{
             margin: 0;
             font-size: 22px;

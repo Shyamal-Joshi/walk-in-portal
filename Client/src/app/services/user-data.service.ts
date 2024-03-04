@@ -13,7 +13,7 @@ export class UserDataService {
   _baseUrl:string="http://localhost:5107/api/";
 
   login(email:string , password:string){
-    return this.http.post<{token:string}>(this._baseUrl+'Auth/login',{
+    return this.http.post<{token:string,userId:string}>(this._baseUrl+'Auth/login',{
       email:email,
       password:password
     })

@@ -132,7 +132,7 @@ public class UserRegistrationController : ControllerBase
                 await _appDbContext.TblFresherTechnologies.AddAsync(TechnologyName);
                 await _appDbContext.SaveChangesAsync();
             }
-            return Ok("User Added");
+            
         }
         else
         {
@@ -194,9 +194,9 @@ public class UserRegistrationController : ControllerBase
                 await _appDbContext.TblExperienceExpertiseTechnologies.AddAsync(TechnologyName);
                 await _appDbContext.SaveChangesAsync();
             }
-            return Ok("User Added");
+            
         }
         
-        return Ok("User Added");
+        return Ok();
     }
 }

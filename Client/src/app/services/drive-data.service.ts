@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IDetailDrive, IDrivesdata } from '../interface';
+import { IDetailDrive, IDrivesdata, userApplication } from '../interface';
 import { Observable} from 'rxjs';
 
 @Injectable({
@@ -18,5 +18,9 @@ export class DriveDataService {
 
   getDriveById(id:number):Observable<IDetailDrive[]>{
     return this.http.get<IDetailDrive[]>(this._baseUrl+`getDrive/${id}`);
+  }
+
+  applyJob(jobApplication:any){
+    return this.http.post(this._baseUrl+'applyJob',jobApplication);
   }
 }

@@ -85,3 +85,11 @@ export interface IUserRegistration{
     eduQualification:IEducationalQualification,
     profQualification:IProfessionalQualification
 }
+
+export interface userApplication{
+    JobId:number
+    JobRoles:string[],
+    TimeSlot:string,
+    UserId:number,
+    UserResume:number
+}

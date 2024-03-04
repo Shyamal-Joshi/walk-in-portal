@@ -5,7 +5,8 @@
         <div class="job__basic__details__card">
             <div class="job__basic__details__title">
                 <h1> {{DriveDetails[0].application.title}} </h1>
-                <button>Apply</button>
+                <p-toast></p-toast>
+                <button (click)="apply()" [disabled]="!this.userAppliedJob.valid" >Apply</button>
             </div>
             <div class="dateTime__and__location__container">
                 <h6>Date & Time :</h6>
@@ -91,40 +92,41 @@
         </div>
     </div>
     
-    <div class="time__slots__and__preference">
-        <h1>Time Slots & Preferences</h1>
-        <div class="time__slot">
-            <label>Select a Time Slot :</label>
-            <div class="time__radios">
-                @for (time of DriveDetails[0].time_slot.timestamp; track $index) {
-                    <div>
-                        <input type="radio" name="application" id="fresher">{{time.start_time | transformTime}} to {{time.end_time | transformTime}}
-                    </div>
-                }
+    <form [formGroup]="userAppliedJob" >
+        <div class="time__slots__and__preference">
+            <h1>Time Slots & Preferences</h1>
+            <div class="time__slot">
+                <label>Select a Time Slot :</label>
+                <div class="time__radios">
+                    @for (time of DriveDetails[0].time_slot.timestamp; track $index) {
+                        <div>
+                            <input type="radio" name="timeSlot" [id]="'fresher' + $index" formControlName="timeSlot" [value]="time.start_time + '-' + time.end_time" >{{time.start_time | transformTime}} to {{time.end_time | transformTime}}
+                        </div>
+                    }
+                </div>
+            </div>
+            <hr>
+            <div class="preferences">
+                <label for="">Select Your Preference :</label>
+                <div class="input__preferences">
+                    @for (role of DriveDetails[0].jobRoleWithDetails; track $index) {
+                        <div>
+                            <input type="checkbox"  [id]="'role'+$index+1" [value]="role.job_role" (change)="onChange($event)" /> {{role.job_role}}
+                        </div>
+                    }
+                    
+                </div>
+            </div>
+            <hr>
+            <div class="resume">
+                <label for="input_resume">
+                    <img src="../../assets/icons/Upload_black_24dp.svg" alt="">
+                    Upload Resume
+                </label>
+                <input id="input_resume" type="file" accept=".pdf" formControlName="resumePath">
             </div>
         </div>
-        <hr>
-        <div class="preferences">
-            <label for="">Select Your Preference :</label>
-            <div class="input__preferences">
-                @for (role of DriveDetails[0].jobRoleWithDetails; track $index) {
-                    <div>
-                        <input type="checkbox" [name]="'role'+$index+1" [id]="'role'+$index+1" [value]="role.job_role"/> {{role.job_role}}
-                    </div>
-                }
-                
-            </div>
-        </div>
-        <hr>
-        <div class="resume">
-            <label for="input_resume">
-                <img src="../../assets/icons/Upload_black_24dp.svg" alt="">
-                Upload Resume
-            </label>
-            <input id="input_resume" type="file" accept=".pdf">
-        </div>
-    </div>
-    
+    </form>
     <div class="roles">
         @for (role of DriveDetails[0].jobRoleWithDetails; track $index) {
             <div class="role__component">

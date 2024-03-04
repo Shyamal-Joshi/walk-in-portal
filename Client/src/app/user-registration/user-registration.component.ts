@@ -103,6 +103,7 @@ export class UserRegistrationComponent {
     this.UserService.register(this.registerBody).subscribe({
       next: response => {
         console.log('Response:', response);
+        this.router.navigateByUrl('/login');
       },
       error: error => {
         console.error('Error:', error);

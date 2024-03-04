@@ -49,20 +49,21 @@ export class LoginComponent {
         if (result ) {
           console.log(result);
           localStorage.setItem("token", result.token);
+          localStorage.setItem("userId", result.userId);
           
           this.router.navigateByUrl('/jobs');
   
         
-          this.toastr.success('Login Successful');
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Login Successful' })
         } else {
           
           console.log("Login failed:", result);
-          this.toastr.error('Login Failed');
+          this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Login Failed' })
         }
       },
       (error) => {
         console.error("Error occurred:", error);
-        this.toastr.error('An error occurred while logging in');
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'An error occurred while logging in' })
       }
     );
   }

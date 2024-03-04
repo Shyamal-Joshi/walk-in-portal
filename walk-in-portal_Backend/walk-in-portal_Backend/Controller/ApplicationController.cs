@@ -175,6 +175,7 @@ namespace walk_in_portal_Backend.Controller
         
         //api for user Applied Job Application
         [HttpPost("applyJob")]
+        [Authorize]
         public async Task<IActionResult> ApplyJobAsync([FromBody] UserAppliedJobDTO jobApplication)
         {
             if (jobApplication == null)
