@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("walk-in-portal_Backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d568eb51ea4bb513da127b892db3df9d3d364ef8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+46cb43847106d3603cabd14569b62e4d92b46bcd")]
 [assembly: System.Reflection.AssemblyProductAttribute("walk-in-portal_Backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("walk-in-portal_Backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

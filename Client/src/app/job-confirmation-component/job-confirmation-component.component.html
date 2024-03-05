@@ -1,0 +1,42 @@
+<div class="application__applied__container">
+ 
+    <div class="succesfull__application__card">
+ 
+        <img src="../../assets/icons/correct.png" alt="success icon">
+ 
+        <h1>Congratulations ! You have successfully applied for the walk-in opportunity</h1>
+ 
+        <hr>
+ 
+        <span>Date & Time of Walk-In :</span>
+ 
+        <h3>{{this.stateData.date | transformDate}}</h3>
+        <h3>{{this.timeArr[0] | transformTime}} to {{this.timeArr[1] | transformTime}}</h3>
+ 
+        <hr>
+ 
+        <span>Venue of Walk-In :</span>
+ 
+        <p>Zeus Systems Pvt. Ltd.
+            <br> 1402, 14th Floor, Tower B, Peninsula Business Park. Ganpatrao Kadam Marg
+            <br> Lower Parel (W)
+            <br> Mumbai - 400 013
+            <br> Phone: +91-22-66600000
+        </p>
+ 
+        <hr>
+ 
+        <span>THINGS TO REMEMBER :</span>
+ 
+        <p>- Please report 30 MINUTES prior to your reporting time.<br>
+           - Download your Hall Ticket from below and carry it with you during your Walk-In.</p>
+ 
+        <hr>
+ 
+        <div class="download__hall_ticket__button">
+            <button (click)="print()">DOWNLOAD HALL TICKET</button>
+        </div>
+    </div>
+ 
+ 
+</div>

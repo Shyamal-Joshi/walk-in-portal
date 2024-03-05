@@ -1,0 +1,83 @@
+@import "../../scss/variables";
+@import "../../scss/mixins";
+
+span {
+  margin: 0px;
+  font-size: $xsmall-font + px;
+  color: $sixth-color;
+}
+
+.application__applied__container {
+  height: 92vh;
+  @include displayFlex(center, normal);
+  margin-top: 76px;
+  position: relative;
+
+  .succesfull__application__card {
+    background-color: $white-color;
+    height: 546px;
+    padding: 24px 32px;
+    width: 720px;
+    border-radius: 2px 2px 0px 0px;
+
+    > img {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      margin: 0 auto;
+      transform: translateY(-70%);
+      left: 0;
+      right: 0;
+    }
+
+    > h1 {
+      margin: 0;
+      font-size: 18px;
+      text-align: center;
+      color: $primary-color;
+      padding-top: 50px;
+      padding-bottom: 8px;
+    }
+
+    > h3,
+    p {
+      margin: 0;
+      font-size: 14px;
+      color: $primary-color;
+      padding-top: 8px;
+    }
+    > hr {
+      margin: 0;
+      height: 0;
+      border: 1px solid $border-12-color;
+      margin: 16px 0
+    }
+
+    .download__hall_ticket__button {
+      @include displayFlex(center, center);
+      > button {
+        background-color: $button-background-color;
+        margin-top: 8px;
+        align-items: center;
+        border: none;
+        width: 202px;
+        height: 28px;
+        text-decoration: none;
+        color: $primary-color;
+        font-family: quicksand;
+        font-weight: 600;
+        box-shadow: 0px 3px 5px #0000003d;
+      }
+    }
+  }
+}
+
+@media (max-width: 376px) {
+  .application__applied__container {
+    .succesfull__application__card {
+      padding: 20px 16px;
+      width: 311px;
+      height: 652px;
+    }
+  }
+}

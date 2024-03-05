@@ -233,7 +233,7 @@ namespace walk_in_portal_Backend.Controller
                     await _appDbContext.TblUserAppliedJobRoleNames.AddAsync(JobRoleName);
                     await _appDbContext.SaveChangesAsync();
                 }
-                return Ok("Applied Successfully");
+                return Ok();
             }
             else
             {

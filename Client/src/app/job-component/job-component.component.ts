@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IDetailDrive, userApplication } from '../interface';
 import { DriveDataService } from '../services/drive-data.service';
 import { TransformTimePipe } from '../Pipes/transform-time.pipe';
@@ -44,9 +44,10 @@ export class JobComponentComponent implements OnInit{
       UserResume:this.userAppliedJob.get('resumePath')!.value
     }
     this._dataService.applyJob(jobApplication).subscribe();
-
+    this.router.navigateByUrl('/confirm', { state:{date:this.DriveDetails[0].application.start_date , timeSlot:jobApplication.TimeSlot} });
+    
   }
-  constructor(private route:ActivatedRoute,private _dataService:DriveDataService,private messageService:MessageService){}
+  constructor(private route:ActivatedRoute,private _dataService:DriveDataService,private messageService:MessageService,private router:Router){}
   ngOnInit(): void {
     let id:number | null = +this.route.snapshot.paramMap.get('id')!;
     this._jobid=id;
