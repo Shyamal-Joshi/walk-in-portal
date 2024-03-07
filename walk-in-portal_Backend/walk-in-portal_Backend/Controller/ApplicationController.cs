@@ -14,10 +14,12 @@ namespace walk_in_portal_Backend.Controller
     public class ApplicationController : ControllerBase
     {
         private readonly DbWalkInPortalContext _appDbContext;
-        
-        public ApplicationController(DbWalkInPortalContext appDbContext)
+        private readonly ILogger<ApplicationController> _logger;
+        public ApplicationController(DbWalkInPortalContext appDbContext , ILogger<ApplicationController> logger)
         {
             _appDbContext = appDbContext;
+            _logger = logger;
+            _logger.LogInformation("ApplicationController instance created.");
         }
         
         //api for job listing page
@@ -25,50 +27,59 @@ namespace walk_in_portal_Backend.Controller
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetApplication()
         {
-            Console.Write("Hello");
-            var result = await  _appDbContext.TblJobRoleDetails.Select(c => new
+            try
             {
-                application_id = c.WalkInApplicationId,
-                application = new
+                _logger.LogInformation("Received HTTP request: GetAllDrives");
+                var result = await _appDbContext.TblJobRoleDetails.Select(c => new
                 {
-                    title=c.WalkInApplication.Title,
-                    location=c.WalkInApplication.Location,
-                    additionalInformation=c.WalkInApplication.AdditionalInformation,
-                    general_instruction=c.WalkInApplication.GeneralInstruction,
-                    exam_instruction=c.WalkInApplication.ExamInstruction,
-                    systemRequirements=c.WalkInApplication.SystemRequirements,
-                    application_process=c.WalkInApplication.ApplicationProcess,
-                    start_date=c.WalkInApplication.StartDate,
-                    end_date=c.WalkInApplication.EndDate,
-                },
-                job_role=c.JobRole.JobName,
-            }).GroupBy(c=> c.application_id).ToListAsync();
-            
-            
-            
-            var final = new List<Dictionary<string, object>>();
-            
-            foreach (var innerList in result)
-            {
-                var applicationId = 0;
-                var jobRoles = new List<string>();
-                object application=new TblWalkInApplication();
-                foreach (var item in innerList)
+                    application_id = c.WalkInApplicationId,
+                    application = new
+                    {
+                        title = c.WalkInApplication.Title,
+                        location = c.WalkInApplication.Location,
+                        additionalInformation = c.WalkInApplication.AdditionalInformation,
+                        general_instruction = c.WalkInApplication.GeneralInstruction,
+                        exam_instruction = c.WalkInApplication.ExamInstruction,
+                        systemRequirements = c.WalkInApplication.SystemRequirements,
+                        application_process = c.WalkInApplication.ApplicationProcess,
+                        start_date = c.WalkInApplication.StartDate,
+                        end_date = c.WalkInApplication.EndDate,
+                    },
+                    job_role = c.JobRole.JobName,
+                }).GroupBy(c => c.application_id).ToListAsync();
+
+
+
+                var final = new List<Dictionary<string, object>>();
+
+                foreach (var innerList in result)
                 {
-                    applicationId = item.application_id;
-                    jobRoles.Add(item.job_role);
-                    application = item.application;
+                    var applicationId = 0;
+                    var jobRoles = new List<string>();
+                    object application = new TblWalkInApplication();
+                    foreach (var item in innerList)
+                    {
+                        applicationId = item.application_id;
+                        jobRoles.Add(item.job_role);
+                        application = item.application;
+                    }
+
+                    final.Add(new Dictionary<string, object>
+                    {
+                        { "application_id", applicationId },
+                        { "job_role", jobRoles },
+                        { "application", application }
+                    });
                 }
                 
-                final.Add(new Dictionary<string, object>
-                {
-                    { "application_id", applicationId },
-                    { "job_role", jobRoles },
-                    { "application", application}
-                });
+                _logger.LogInformation("Request processed successfully: GetAllDrives");
+                return Ok(final);
             }
-            
-            return Ok(final);
+            catch (Exception ex)
+            {
+                _logger.LogError("An error occurred while processing the request: GetAllDrives" + ex);
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+            }
         }
 
         //api for job details page
@@ -77,22 +88,24 @@ namespace walk_in_portal_Backend.Controller
         [Authorize]
         public async Task<IActionResult> GetDrive(int id)
         {
+            _logger.LogInformation($"GetDrive method called with id: {id}");
+
             var applications = await _appDbContext.TblJobRoleDetails
-                .Where(c => c.WalkInApplicationId ==  id)
+                .Where(c => c.WalkInApplicationId == id)
                 .Select(c => new
                 {
                     application_id = c.WalkInApplicationId,
                     application = new
                     {
-                        title=c.WalkInApplication.Title,
-                        location=c.WalkInApplication.Location,
-                        additionalInformation=c.WalkInApplication.AdditionalInformation,
-                        general_instruction=c.WalkInApplication.GeneralInstruction,
-                        exam_instruction=c.WalkInApplication.ExamInstruction,
-                        systemRequirements=c.WalkInApplication.SystemRequirements,
-                        application_process=c.WalkInApplication.ApplicationProcess,
-                        start_date=c.WalkInApplication.StartDate,
-                        end_date=c.WalkInApplication.EndDate,
+                        title = c.WalkInApplication.Title,
+                        location = c.WalkInApplication.Location,
+                        additionalInformation = c.WalkInApplication.AdditionalInformation,
+                        general_instruction = c.WalkInApplication.GeneralInstruction,
+                        exam_instruction = c.WalkInApplication.ExamInstruction,
+                        systemRequirements = c.WalkInApplication.SystemRequirements,
+                        application_process = c.WalkInApplication.ApplicationProcess,
+                        start_date = c.WalkInApplication.StartDate,
+                        end_date = c.WalkInApplication.EndDate,
                     },
                     job_role = c.JobRole.JobName,
                     role_requirements = c.RoleRequirements,
@@ -102,22 +115,26 @@ namespace walk_in_portal_Backend.Controller
                 .GroupBy(c => c.application_id)
                 .ToListAsync();
 
-            if (applications == null)
+            _logger.LogInformation($"Retrieved applications: {applications.Count}");
+
+            if (applications == null || !applications.Any())
             {
+                _logger.LogInformation($"Applications not found for id: {id}");
                 return NotFound();
             }
-            
+
             var timeSlot = await _appDbContext.TblWalkInApplicationTimeSlots
-                .Where(c => c.WalkInApplicationId ==  id)
+                .Where(c => c.WalkInApplicationId == id)
                 .Select(c => new
                 {
                     application_id = c.WalkInApplicationId,
-                    start_time=c.TimeSlot.StartTime,
-                    end_time=c.TimeSlot.EndTime
+                    start_time = c.TimeSlot.StartTime,
+                    end_time = c.TimeSlot.EndTime
                 })
-                .GroupBy(c=> c.application_id)
+                .GroupBy(c => c.application_id)
                 .ToListAsync();
-            
+
+            _logger.LogInformation($"Retrieved time slots: {timeSlot.Count}");
 
             var updatedTimeSlot = new List<Dictionary<string, object>>();
 
@@ -126,26 +143,26 @@ namespace walk_in_portal_Backend.Controller
                 var times = new List<Dictionary<string, object>>();
                 foreach (var subSlots in slots)
                 {
-                    times.Add(new Dictionary<string,object>
+                    times.Add(new Dictionary<string, object>
                     {
-                        {"start_time", Convert.ToString(subSlots.start_time)},
-                        {"end_time", Convert.ToString(subSlots.end_time)}
+                        { "start_time", Convert.ToString(subSlots.start_time) },
+                        { "end_time", Convert.ToString(subSlots.end_time) }
                     });
                 }
 
                 updatedTimeSlot.Add(new Dictionary<string, object>
                 {
-                    {"timestamp", times},
+                    { "timestamp", times },
                 });
             }
-            
+
             var updatedApplication = new List<Dictionary<string, object>>();
 
             foreach (var innerList in applications)
             {
                 var applicationId = 0;
                 var jobRolesWithDetails = new List<Dictionary<string, object>>();
-                object application=new TblWalkInApplication();
+                object application = new TblWalkInApplication();
                 foreach (var item in innerList)
                 {
                     jobRolesWithDetails.Add(
@@ -158,20 +175,23 @@ namespace walk_in_portal_Backend.Controller
                         }
                     );
                     application = item.application;
-                    applicationId=item.application_id;
+                    applicationId = item.application_id;
                 }
-                
+
                 updatedApplication.Add(new Dictionary<string, object>
                 {
-                    {"application_id", applicationId},
-                    { "application", application},
-                    { "jobRoleWithDetails", jobRolesWithDetails},
-                    { "time_slot", updatedTimeSlot[0]}
+                    { "application_id", applicationId },
+                    { "application", application },
+                    { "jobRoleWithDetails", jobRolesWithDetails },
+                    { "time_slot", updatedTimeSlot[0] }
                 });
             }
-            
+
+            _logger.LogInformation($"Returning updated applications: {updatedApplication.Count}");
+
             return Ok(updatedApplication);
         }
+
         
         //api for user Applied Job Application
         [HttpPost("applyJob")]

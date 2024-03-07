@@ -137,3 +137,6 @@ D:\walk-in-portal\walk-in-portal_Backend\walk-in-portal_Backend\bin\Debug\net8.0
 D:\walk-in-portal\walk-in-portal_Backend\walk-in-portal_Backend\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\walk-in-portal\walk-in-portal_Backend\walk-in-portal_Backend\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 D:\walk-in-portal\walk-in-portal_Backend\walk-in-portal_Backend\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\walk-in-portal\walk-in-portal_Backend\walk-in-portal_Backend\bin\Debug\net8.0\log4net.config
+D:\walk-in-portal\walk-in-portal_Backend\walk-in-portal_Backend\bin\Debug\net8.0\log4net.dll
+D:\walk-in-portal\walk-in-portal_Backend\walk-in-portal_Backend\bin\Debug\net8.0\Microsoft.Extensions.Logging.Log4Net.AspNetCore.dll

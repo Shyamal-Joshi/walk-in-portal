@@ -8,6 +8,9 @@ using walk_in_portal_Backend.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.ClearProviders();
+builder.Logging.AddLog4Net();
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -40,6 +43,7 @@ builder.Services.AddSwaggerGen(c =>
                     Type = ReferenceType.SecurityScheme,
                     Id = "Bearer"
                 }
+                
             },
             new string[] {}
         }
