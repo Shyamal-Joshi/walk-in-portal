@@ -1,0 +1,66 @@
+﻿version: '1.0'
+networks:
+  dev:
+    driver: bridge
+
+services:
+  backend_db:
+    image: mysql:latest
+    container_name: backend_db
+    environment:
+      - MYSQL_ROOT_PASSWORD=2003
+    ports:
+      - "9000:3306"
+    restart: always
+    volumes:
+      - mysql-db-volume:/var/lib/mysql
+    networks:
+      - dev
+  
+  walk-in-portal_backend:
+    image: walk-in-portal_backend
+    build:
+      context: .
+      dockerfile: walk-in-portal_Backend/Dockerfile
+    depends_on:
+      - backend_db
+    container_name: walk-in-portal_backend
+    # environment:
+    #   - ConnectionStrings__Default=server=backend_db;Port=9000;User=root;Password=2003;database=db_walk-in-portal
+    ports:
+      - "8080:8080"
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    ports:
+      - 9100:9100
+    restart: always
+    # volumes:
+    #   - /proc:/host/proc:ro
+    #   - /sys:/host/sys:ro
+    #   - /:/rootfs:ro
+  
+  prometheus_service:
+    image: prom/prometheus
+    container_name: prometheus_service
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus-config.yml:/etc/prometheus/prometheus.yml
+    # depends_on:
+    #   - walk-in-portal_backend
+    #   - backend_db
+  
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana_service
+    ports:
+      - 3000:3000
+    volumes:
+      - ./grafana-provisioning:/etc/grafana/provisioning
+    depends_on: 
+      - prometheus_service
+
+volumes:
+  mysql-db-volume:

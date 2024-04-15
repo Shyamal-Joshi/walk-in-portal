@@ -1,0 +1,6 @@
+WARN 1 Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware - The WebRootPath was not found: D:\walk-in-portal\walk-in-portal_Backend\walk-in-portal_Backend\wwwroot. Static files may be unavailable.
+INFO 1 Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5107
+INFO 1 Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+INFO 1 Microsoft.Hosting.Lifetime - Hosting environment: Development
+INFO 1 Microsoft.Hosting.Lifetime - Content root path: D:\walk-in-portal\walk-in-portal_Backend\walk-in-portal_Backend
+INFO 3 Microsoft.Hosting.Lifetime - Application is shutting down...

@@ -4,51 +4,14 @@ INFO 1 Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut do
 INFO 1 Microsoft.Hosting.Lifetime - Hosting environment: Development
 INFO 1 Microsoft.Hosting.Lifetime - Content root path: D:\walk-in-portal\walk-in-portal_Backend\walk-in-portal_Backend
 WARN .NET TP Worker Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware - Failed to determine the https port for redirect.
-INFO .NET TP Worker Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (81ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-SELECT `t`.`walk_in_application_id`, `t0`.`title`, `t0`.`location`, `t0`.`additional_information` AS `additionalInformation`, `t0`.`general_instruction`, `t0`.`exam_instruction`, `t0`.`system_requirements` AS `systemRequirements`, `t0`.`application_process`, `t0`.`start_date`, `t0`.`end_date`, `t1`.`job_name` AS `job_role`
-FROM `tbl_job_role_details` AS `t`
-INNER JOIN `tbl_walk_in_application` AS `t0` ON `t`.`walk_in_application_id` = `t0`.`id`
-INNER JOIN `tbl_job_roles` AS `t1` ON `t`.`job_role_id` = `t1`.`id`
-ORDER BY `t`.`walk_in_application_id`
-INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - Processing Job listing Data...
-INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - ApplicationController instance created.
-INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - Received HTTP request: GetAllDrives
-INFO .NET TP Worker Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (17ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-SELECT `t`.`walk_in_application_id`, `t0`.`title`, `t0`.`location`, `t0`.`additional_information` AS `additionalInformation`, `t0`.`general_instruction`, `t0`.`exam_instruction`, `t0`.`system_requirements` AS `systemRequirements`, `t0`.`application_process`, `t0`.`start_date`, `t0`.`end_date`, `t1`.`job_name` AS `job_role`
-FROM `tbl_job_role_details` AS `t`
-INNER JOIN `tbl_walk_in_application` AS `t0` ON `t`.`walk_in_application_id` = `t0`.`id`
-INNER JOIN `tbl_job_roles` AS `t1` ON `t`.`job_role_id` = `t1`.`id`
-ORDER BY `t`.`walk_in_application_id`
-INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - Request processed successfully: GetAllDrives
-INFO .NET TP Worker Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (14ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+INFO .NET TP Worker Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (119ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 SELECT `t`.`name`
-FROM `tbl_streams` AS `t`
-INFO .NET TP Worker Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (35ms) [Parameters=[@__bodyUser_Email_0='?' (Size = 255)], CommandType='Text', CommandTimeout='30']
-SELECT `t`.`id`, `t`.`dt_created`, `t`.`dt_modified`, `t`.`email_id`, `t`.`first_name`, `t`.`last_name`, `t`.`news_letter`, `t`.`password`, `t`.`phone_number`, `t`.`portfolio_url`, `t`.`profile_photo`, `t`.`referrer`, `t`.`resume`, `t`.`user_role`
-FROM `tbl_user_information` AS `t`
-WHERE `t`.`email_id` = @__bodyUser_Email_0
-LIMIT 1
-INFO .NET TP Worker Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (6ms) [Parameters=[@__bodyUser_Email_0='?' (Size = 255)], CommandType='Text', CommandTimeout='30']
-SELECT `t`.`id`, `t`.`dt_created`, `t`.`dt_modified`, `t`.`email_id`, `t`.`first_name`, `t`.`last_name`, `t`.`news_letter`, `t`.`password`, `t`.`phone_number`, `t`.`portfolio_url`, `t`.`profile_photo`, `t`.`referrer`, `t`.`resume`, `t`.`user_role`
-FROM `tbl_user_information` AS `t`
-WHERE `t`.`email_id` = @__bodyUser_Email_0
-LIMIT 1
-INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - ApplicationController instance created.
-INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - GetDrive method called with id: 1
-INFO .NET TP Worker Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (19ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT `t`.`walk_in_application_id`, `t0`.`title`, `t0`.`location`, `t0`.`additional_information` AS `additionalInformation`, `t0`.`general_instruction`, `t0`.`exam_instruction`, `t0`.`system_requirements` AS `systemRequirements`, `t0`.`application_process`, `t0`.`start_date`, `t0`.`end_date`, `t1`.`job_name` AS `job_role`, `t`.`role_requirements`, `t`.`role_description` AS `role_descriptions`, `t`.`gross_compensation_package` AS `package`
-FROM `tbl_job_role_details` AS `t`
-INNER JOIN `tbl_walk_in_application` AS `t0` ON `t`.`walk_in_application_id` = `t0`.`id`
-INNER JOIN `tbl_job_roles` AS `t1` ON `t`.`job_role_id` = `t1`.`id`
-WHERE `t`.`walk_in_application_id` = @__id_0
-ORDER BY `t`.`walk_in_application_id`
-INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - Retrieved applications: 1
-INFO .NET TP Worker Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (7ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
-SELECT `t`.`walk_in_application_id`, `t0`.`start_time`, `t0`.`end_time`
-FROM `tbl_walk_in_application_time_slot` AS `t`
-INNER JOIN `tbl_time_slot` AS `t0` ON `t`.`time_slot_id` = `t0`.`id`
-WHERE `t`.`walk_in_application_id` = @__id_0
-ORDER BY `t`.`walk_in_application_id`
-INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - Retrieved time slots: 1
-INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - Returning updated applications: 1
-INFO 36 Microsoft.Hosting.Lifetime - Application is shutting down...
+FROM `tbl_qualifications_colleges` AS `t`
+INFO 3 Microsoft.Hosting.Lifetime - Application is shutting down...
+WARN 1 Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware - The WebRootPath was not found: D:\walk-in-portal\walk-in-portal_Backend\walk-in-portal_Backend\wwwroot. Static files may be unavailable.
+INFO 1 Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5107
+INFO 1 Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+INFO 1 Microsoft.Hosting.Lifetime - Hosting environment: Development
+INFO 1 Microsoft.Hosting.Lifetime - Content root path: D:\walk-in-portal\walk-in-portal_Backend\walk-in-portal_Backend
+WARN .NET TP Worker Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware - Failed to determine the https port for redirect.
+INFO 14 Microsoft.Hosting.Lifetime - Application is shutting down...

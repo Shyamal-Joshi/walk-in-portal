@@ -4,12 +4,15 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
 using walk_in_portal_Backend.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Logging.ClearProviders();
 builder.Logging.AddLog4Net();
+
 
 // Add services to the container.
 
@@ -49,6 +52,14 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
+
+builder.Services.AddOpenTelemetry()
+    .WithMetrics(metrics =>
+            metrics
+                .AddAspNetCoreInstrumentation() // ASP.NET Core related
+                .AddRuntimeInstrumentation() // .NET Runtime metrics like - GC, Memory Pressure, Heap Leaks etc
+                .AddPrometheusExporter() // Prometheus Exporter
+    );
 
 
 //For connecting database
@@ -114,6 +125,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapPrometheusScrapingEndpoint();
 
 
 app.Run();
