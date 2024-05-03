@@ -12,6 +12,11 @@ export const routes: Routes = [
         component: LoginComponent,
     },
     {
+        path: 'login',
+        pathMatch: 'full',
+        component: LoginComponent,
+    },
+    {
         path: 'registration',
         pathMatch: 'full',
         component: UserRegistrationComponent,

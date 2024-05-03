@@ -214,3 +214,5 @@ D:\walk-in-portal\walk-in-portal_Backend\walk-in-portal_Backend\bin\Debug\net8.0
 D:\walk-in-portal\walk-in-portal_Backend\walk-in-portal_Backend\bin\Debug\net8.0\OpenTelemetry.Instrumentation.AspNetCore.dll
 D:\walk-in-portal\walk-in-portal_Backend\walk-in-portal_Backend\bin\Debug\net8.0\OpenTelemetry.Instrumentation.Http.dll
 D:\walk-in-portal\walk-in-portal_Backend\walk-in-portal_Backend\bin\Debug\net8.0\OpenTelemetry.Instrumentation.Runtime.dll
+D:\walk-in-portal\walk-in-portal_Backend\walk-in-portal_Backend\bin\Debug\net8.0\log4net.Appender.Loki.dll
+D:\walk-in-portal\walk-in-portal_Backend\walk-in-portal_Backend\bin\Debug\net8.0\Newtonsoft.Json.dll

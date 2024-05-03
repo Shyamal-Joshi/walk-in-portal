@@ -30,7 +30,8 @@
           "Pomelo.EntityFrameworkCore.MySql": "8.0.0",
           "SharpAbp.Abp.OpenTelemetry.Exporter.Prometheus.AspNetCore": "3.3.0",
           "Swashbuckle.AspNetCore": "6.4.0",
-          "System.IdentityModel.Tokens.Jwt": "7.3.1"
+          "System.IdentityModel.Tokens.Jwt": "7.3.1",
+          "log4net.LokiAppender": "1.0.5"
         },
         "runtime": {
           "walk-in-portal_Backend.dll": {}
@@ -336,6 +337,18 @@
           "lib/netstandard2.0/log4net.dll": {
             "assemblyVersion": "2.0.15.0",
             "fileVersion": "2.0.15.0"
+          }
+        }
+      },
+      "log4net.LokiAppender/1.0.5": {
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.1",
+          "log4net": "2.0.15"
+        },
+        "runtime": {
+          "lib/net462/log4net.Appender.Loki.dll": {
+            "assemblyVersion": "1.0.0.3",
+            "fileVersion": "1.0.0.3"
           }
         }
       },
@@ -1044,6 +1057,14 @@
           "lib/net7.0/MySqlConnector.DependencyInjection.dll": {
             "assemblyVersion": "2.0.0.0",
             "fileVersion": "2.3.5.0"
+          }
+        }
+      },
+      "Newtonsoft.Json/12.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.0.1.22727"
           }
         }
       },
@@ -2317,6 +2338,13 @@
       "path": "log4net/2.0.15",
       "hashPath": "log4net.2.0.15.nupkg.sha512"
     },
+    "log4net.LokiAppender/1.0.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-FfKBKRWkLA81uUD8Y9T2Gcx/tuJskkZZxa/FB9msuT9Oh62oS7kKgzclzai85lhbXTXasJn/2cPPATNj2z0JwQ==",
+      "path": "log4net.lokiappender/1.0.5",
+      "hashPath": "log4net.lokiappender.1.0.5.nupkg.sha512"
+    },
     "Microsoft.AspNetCore.Authentication.JwtBearer/8.0.2": {
       "type": "package",
       "serviceable": true,
@@ -2757,6 +2785,13 @@
       "sha512": "sha512-DZ8cSOWyA/OH0T2CCV7L7Cq3ns8KDDQPgGYH8L7322096ACjsmjkb5+aRmZ3ZSvL7dbCtizpi6KqVpafRxrKRg==",
       "path": "mysqlconnector.dependencyinjection/2.3.5",
       "hashPath": "mysqlconnector.dependencyinjection.2.3.5.nupkg.sha512"
+    },
+    "Newtonsoft.Json/12.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pBR3wCgYWZGiaZDYP+HHYnalVnPJlpP1q55qvVb+adrDHmFMDc1NAKio61xTwftK3Pw5h7TZJPJEEVMd6ty8rg==",
+      "path": "newtonsoft.json/12.0.1",
+      "hashPath": "newtonsoft.json.12.0.1.nupkg.sha512"
     },
     "Nito.AsyncEx.Context/5.1.2": {
       "type": "package",

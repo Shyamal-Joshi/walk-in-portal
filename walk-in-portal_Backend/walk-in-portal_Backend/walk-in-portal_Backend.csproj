@@ -13,6 +13,7 @@
         <PackageReference Include="App.Metrics.AspNetCore.Endpoints" Version="4.3.0" />
         <PackageReference Include="App.Metrics.AspNetCore.Tracking" Version="4.3.0" />
         <PackageReference Include="App.Metrics.Formatters.Prometheus" Version="4.3.0" />
+        <PackageReference Include="log4net.LokiAppender" Version="1.0.5" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.2" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.2" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.2" />

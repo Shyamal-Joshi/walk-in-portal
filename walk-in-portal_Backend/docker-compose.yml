@@ -1,7 +1,5 @@
 ﻿version: '1.0'
-networks:
-  dev:
-    driver: bridge
+
 
 services:
   backend_db:
@@ -14,8 +12,7 @@ services:
     restart: always
     volumes:
       - mysql-db-volume:/var/lib/mysql
-    networks:
-      - dev
+    
   
   walk-in-portal_backend:
     image: walk-in-portal_backend
@@ -24,11 +21,16 @@ services:
       dockerfile: walk-in-portal_Backend/Dockerfile
     depends_on:
       - backend_db
+      - loki
     container_name: walk-in-portal_backend
     # environment:
     #   - ConnectionStrings__Default=server=backend_db;Port=9000;User=root;Password=2003;database=db_walk-in-portal
     ports:
       - "8080:8080"
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://loki:3100/loki/api/v1/push"
 
   node-exporter:
     image: prom/node-exporter:latest
@@ -36,6 +38,7 @@ services:
     ports:
       - 9100:9100
     restart: always
+    
     # volumes:
     #   - /proc:/host/proc:ro
     #   - /sys:/host/sys:ro
@@ -48,6 +51,7 @@ services:
       - 9090:9090
     volumes:
       - ./prometheus-config.yml:/etc/prometheus/prometheus.yml
+    
     # depends_on:
     #   - walk-in-portal_backend
     #   - backend_db
@@ -61,6 +65,17 @@ services:
       - ./grafana-provisioning:/etc/grafana/provisioning
     depends_on: 
       - prometheus_service
+    
+  
+  loki:
+    image: grafana/loki:2.7.0
+    container_name: loki
+    restart: always
+    ports:
+      - 3100:3100
+    
+    
+    
 
 volumes:
   mysql-db-volume:

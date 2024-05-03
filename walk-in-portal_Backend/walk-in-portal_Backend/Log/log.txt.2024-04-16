@@ -1,0 +1,48 @@
+WARN 1 Microsoft.AspNetCore.StaticFiles.StaticFileMiddleware - The WebRootPath was not found: D:\walk-in-portal\walk-in-portal_Backend\walk-in-portal_Backend\wwwroot. Static files may be unavailable.
+INFO 1 Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5107
+INFO 1 Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+INFO 1 Microsoft.Hosting.Lifetime - Hosting environment: Development
+INFO 1 Microsoft.Hosting.Lifetime - Content root path: D:\walk-in-portal\walk-in-portal_Backend\walk-in-portal_Backend
+WARN .NET TP Worker Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware - Failed to determine the https port for redirect.
+INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - ApplicationController instance created.
+INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - this is showing infomation monitoring logs
+INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - ApplicationController instance created.
+INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - this is showing infomation monitoring logs
+INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - ApplicationController instance created.
+INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - this is showing infomation monitoring logs
+INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - ApplicationController instance created.
+INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - this is showing infomation monitoring logs
+INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - ApplicationController instance created.
+INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - this is showing infomation monitoring logs
+INFO .NET TP Worker Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (47ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `t`.`name`
+FROM `tbl_qualifications_colleges` AS `t`
+INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - ApplicationController instance created.
+INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - Received HTTP request: GetAllDrives
+INFO .NET TP Worker Microsoft.EntityFrameworkCore.Database.Command - Executed DbCommand (20ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT `t`.`walk_in_application_id`, `t0`.`title`, `t0`.`location`, `t0`.`additional_information` AS `additionalInformation`, `t0`.`general_instruction`, `t0`.`exam_instruction`, `t0`.`system_requirements` AS `systemRequirements`, `t0`.`application_process`, `t0`.`start_date`, `t0`.`end_date`, `t1`.`job_name` AS `job_role`
+FROM `tbl_job_role_details` AS `t`
+INNER JOIN `tbl_walk_in_application` AS `t0` ON `t`.`walk_in_application_id` = `t0`.`id`
+INNER JOIN `tbl_job_roles` AS `t1` ON `t`.`job_role_id` = `t1`.`id`
+ORDER BY `t`.`walk_in_application_id`
+INFO .NET TP Worker walk_in_portal_Backend.Controller.ApplicationController - Request processed successfully: GetAllDrives
+INFO 18 Microsoft.Hosting.Lifetime - Application is shutting down...
+INFO 1 Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5252
+INFO 1 Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+WARN 14 Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware - Failed to determine the https port for redirect.
+INFO 1 Microsoft.Hosting.Lifetime - Hosting environment: Development
+INFO 1 Microsoft.Hosting.Lifetime - Content root path: C:\Users\Shyamal\Downloads\MyWebApi\MyWebApi
+INFO 18 Microsoft.Hosting.Lifetime - Application is shutting down...
+INFO 1 Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5252
+INFO 1 Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+INFO 1 Microsoft.Hosting.Lifetime - Hosting environment: Development
+INFO 1 Microsoft.Hosting.Lifetime - Content root path: C:\Users\Shyamal\Downloads\MyWebApi\MyWebApi
+INFO 14 Microsoft.Hosting.Lifetime - Application is shutting down...
+INFO 1 Microsoft.Hosting.Lifetime - Now listening on: http://localhost:5252
+INFO 1 Microsoft.Hosting.Lifetime - Application started. Press Ctrl+C to shut down.
+WARN 9 Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware - Failed to determine the https port for redirect.
+INFO 1 Microsoft.Hosting.Lifetime - Hosting environment: Development
+INFO 9 MyWebApi.demoController - demoController instance created.
+INFO 1 Microsoft.Hosting.Lifetime - Content root path: C:\Users\Shyamal\Downloads\MyWebApi\MyWebApi
+INFO 9 MyWebApi.demoController - this is showing infomation monitoring logs
+INFO 15 Microsoft.Hosting.Lifetime - Application is shutting down...

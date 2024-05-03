@@ -260,6 +260,14 @@ namespace walk_in_portal_Backend.Controller
                 return ValidationProblem(jobApplication.TimeSlot);
             }
         }
+        
+        //api for monitoring and logs
+        [HttpGet("monitor")]
+        public async Task<IActionResult> monitor()
+        {
+            _logger.LogInformation("this is showing infomation monitoring logs");
+            return Ok();
+        }
     }
 }
 
